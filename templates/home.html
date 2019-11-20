@@ -1,0 +1,38 @@
+<html>
+  <body>
+    <h1>Add aliment</h1>
+    <form method="POST" action="/">
+      <input type="text" name="nom">
+      <input type="number" name="quantity">
+      <input type="Date" name="peremption">
+      <input type="submit" value="Add">
+    </form>
+
+    <h1>Aliment</h1>
+    <table>
+      {% for aliment in aliments %}
+        <tr>
+          <td>
+            {{aliment.nom}}
+            {{aliment.quantity}}
+            {{aliment.peremption}}
+            {{aliment.ajout}}
+          </td>
+          <td>
+            <form method="POST" action="./update" style="display: inline">
+              <input type="hidden" value="{{aliment.nom}}" name="oldtitle">
+              <input type="text" value="{{aliment.nom}}" name="newtitle">
+              <input type="submit" value="Update">
+            </form>
+          </td>
+          <td>
+            <form method="POST" action="./delete" style="display: inline">
+              <input type="hidden" value="{{aliment.nom}}" name="nom">
+              <input type="submit" value="Delete">
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+    </table>
+  </body>
+</html>
