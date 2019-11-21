@@ -13,10 +13,13 @@
       {% for aliment in aliments %}
         <tr>
           <td>
+            {{aliment.id}}
+            {{aliment.frais}}
             {{aliment.nom}}
             {{aliment.quantity}}
             {{aliment.peremption}}
             {{aliment.ajout}}
+            {{aliment.dlc}}
           </td>
           <td>
             <form method="POST" action="./update" style="display: inline">
