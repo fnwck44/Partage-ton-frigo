@@ -42,26 +42,26 @@
   <form class="form" action="" method="post">
   <label for="POST-name">Vous êtes :</label>
   <div class="container"></div>
-  <input id="POST-name" type="text" name="name" placeholder="Nom Prénom" maxlength="40">
+  <input id="POST-name" type="text" name="nom" placeholder="Nom Prénom" maxlength="40">
   <br><br>
   <label for="POST-title">Produit ajouté :</label>
-  <input id="POST-title" type="text" name="nom" placeholder="titre" maxlength="40">
+  <input id="POST-title" type="text" name="titre" placeholder="titre" maxlength="40">
     <br><br>
         <label for="POST-cat">Catégorie : </label>
-	<select name="POST-cat" id="cat">
+	<select id="POST-frais" type="text" name="frais">
 		<option value="frais">frais</option>
 		<option value="sec">sec</option>
 	</select>
    <br><br>
-    <label for="dlc">A consommer : </label>
-	<select name="dlc-type" id="dlc-type">
-		<option value="dlc">avant le</option>
-		<option value="dluo">de préférence avant le</option>
+    <label for="POST-dlc">A consommer : </label>
+	<select name="dlc" id="dlc-type">
+		<option value="avant le">avant le</option>
+		<option value="de préférence avant le">de préférence avant le</option>
 	</select>
 	<input type="Date" id="dlc" name="peremption">
 	<br><br>
   <label for="POST-description">Description:</label>
-  <textarea id="POST-description" type="text" name="descrption" placeholder="facultatif, 150 caractères max"></textarea>
+  <textarea id="POST-description" type="text" name="desc" placeholder="facultatif, 150 caractères max" maxlength="150"></textarea>
   <br><br>
   <label for="POST-qty">Quantité :</label>
   
@@ -85,21 +85,26 @@
       {% for aliment in aliments %}
         <tr>
           <td>
-            {{aliment.nom}}
+            {{aliment.id}}
+            {{aliment.frais}}
+            {{aliment.titre}}
             {{aliment.quantity}}
+            {{aliment.dlc}}
             {{aliment.peremption}}
             {{aliment.ajout}}
+            {{aliment.desc}}
+            {{aliment.nom}}
           </td>
           <td>
             <form method="POST" action="./update" style="display: inline">
-              <input type="hidden" value="{{aliment.nom}}" name="oldtitle">
-              <input type="text" value="{{aliment.nom}}" name="newtitle">
+              <input type="hidden" value="{{aliment.titre}}" name="oldtitle">
+              <input type="text" value="{{aliment.titre}}" name="newtitle">
               <input type="submit" value="Update">
             </form>
           </td>
           <td>
             <form method="POST" action="./delete" style="display: inline">
-              <input type="hidden" value="{{aliment.nom}}" name="nom">
+              <input type="hidden" value="{{aliment.titre}}" name="titre">
               <input type="submit" value="Delete">
             </form>
           </td>
