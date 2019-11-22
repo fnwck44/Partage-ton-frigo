@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
+    <title>Frigo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="menu.css">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<link rel="stylesheet" type="text/css" href="liste.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/liste.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/page.css') }}">
 
 <style>
-	
-	</style>
 
+	</style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
 <div class="menu">
@@ -32,10 +31,8 @@
   </a>
 </div>
 </div>
-<img  src="bas.PNG" style="position:fixed; bottom: 0px; right: 0px; opacity: 0.5; width:300px;">
-<img  src="haut.PNG" style="position:fixed; top: 0px; left: 0px; opacity: 0.5; width:300px;">
-
-
+<img  src="{{ url_for('static', filename='img/bas.png') }}" style="position:fixed; bottom: 0px; right: 0px; opacity: 0.5; width:300px;">
+<img  src="{{ url_for('static', filename='img/haut.png') }}" style="position:fixed; top: 0px; left: 0px; opacity: 0.5; width:300px;">
 <div class="main">
  <div class="param">
   <h2 style:>Denrées disponibles</h2>
@@ -59,60 +56,25 @@
 		<option value="ok">non périmé</option>
 		<option value="perime">périmé</option>
 	</select>
-	
-	</div>
-	
-	  
-	<div class="list">
-      <img class="photo" src="https://static.openfoodfacts.org/images/products/303/835/288/0206/front_fr.42.full.jpg">
-        <div class="text">
-        <span class="name">Conserve de raviolis <span class="cat"> - sec</span></span>
-        <span class="description"> Ceci est une description, et j'aime les raviolis.</span>
-        <span class="quantity">Quantité disponible : 2</span>
-        <span class="added"> Ajouté le 18/04/1998 par Thomas HEVELINE</span>
-        <span class="date"> A consommer de préférence avant le : 18/04/2018</span>
-        <div class="buttons">
-        <input class="select" type="number" name="quantité" value="1" min="1" max="5">
-        <button class="take" type="button">Prendre</button>
-        <button class="throw" type="button">Jeter</button>
-			</div>
-	</div>
-	</div>
-	<div class="list">
-      <img class="photo" src="https://static.openfoodfacts.org/images/products/303/835/288/0206/front_fr.42.full.jpg">
-        <div class="text">
-        <span class="name">Conserve de raviolis <span class="cat"> - sec</span></span>
-        <span class="description"> Ceci est une description, et j'aime les raviolis.</span>
-        <span class="quantity">Quantité disponible : 2</span>
-        <span class="added"> Ajouté le 18/04/1998 par Thomas HEVELINE</span>
-        <span class="date"> A consommer de préférence avant le : 18/04/2018</span>
-        <div class="buttons">
-        <input class="select" type="number" name="quantité" value="1" min="1" max="5">
-        <button class="take" type="button">Prendre</button>
-        <button class="throw" type="button">Jeter</button>
-			</div>
-	</div>
-	</div>
-	<div class="list">
-      <img class="photo" src="https://static.openfoodfacts.org/images/products/303/835/288/0206/front_fr.42.full.jpg">
-        <div class="text">
-        <span class="name">Conserve de raviolis <span class="cat"> - sec</span></span>
-        <span class="description"> Ceci est une description, et j'aime les raviolis.</span>
-        <span class="quantity">Quantité disponible : 2</span>
-        <span class="added"> Ajouté le 18/04/1998 par Thomas HEVELINE</span>
-        <span class="date"> A consommer de préférence avant le : 18/04/2018</span>
-        <div class="buttons">
-        <input class="select" type="number" name="quantité" value="1" min="1" max="5">
-        <button class="take" type="button">Prendre</button>
-        <button class="throw" type="button">Jeter</button>
-			</div>
-	</div>
-	</div>
-	
-	
-	
-  
 
+	</div>
+    {% for aliment in aliments %}
+	<div class="list">
+      <img class="photo" src="https://static.openfoodfacts.org/images/products/303/835/288/0206/front_fr.42.full.jpg">
+        <div class="text">
+        <span class="name">{{aliment.titre}}<span class="cat">-{{aliment.frais}}</span></span>
+        <span class="description">{{aliment.desc}}</span>
+        <span class="quantity">Quantité disponible :{{aliment.quantity}} </span>
+        <span class="added"> Ajouté le {{aliment.ajout}} par {{aliment.nom}} </span>
+        <span class="date"> A consommer {{aliment.dlc}} : {{aliment.peremption}}</span>
+        <div class="buttons">
+        <input class="select" type="number" name="quantité" value="1" min="1" max="5">
+        <button class="take" type="button">Prendre</button>
+        <button class="throw" type="button">Jeter</button>
+			</div>
+	</div>
+	</div>
+    {% endfor %}
 	</div>
 <script type="text/javascript">
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */

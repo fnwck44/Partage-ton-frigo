@@ -12,30 +12,44 @@ database_file = "sqlite:///{}".format(os.path.join(project_dir, "database.db"))
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 
-db = SQLAlchemy(app)
+db: SQLAlchemy = SQLAlchemy(app)
+
 
 class Aliment(db.Model):
-    nom = db.Column(db.String(80),  nullable=False, primary_key=True)
-    quantity = db.Column(db.Integer,  nullable=False, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    titre = db.Column(db.String(80))
+    quantity = db.Column(db.Integer, nullable=False)
     peremption = db.Column(db.Date)
     ajout = db.Column(db.Date)
+    frais = db.Column(db.String(80), nullable=False)
+    desc = db.Column(db.String(150))
+    dlc = db.Column(db.String(30))
+    nom = db.Column(db.String(50))
 
     def __repr__(self):
-        return "<Title: {}>".format(self.nom),\
-               "<Qt:{}>".format(self.quantity),\
-               "Per:{}".format(self.peremption),\
-               "Ajt:{}".format(self.ajout),
+        return "<Title: {}>".format(self.titre), \
+               "<Quantity:{}>".format(self.quantity), \
+               "Peremption:{}".format(self.peremption), \
+               "Ajout:{}".format(self.ajout), \
+               "frais:{}".format(self.frais), \
+               "desc:{}".format(self.desc), \
+               "dlc:{}".format(self.dlc),\
+               "nom:{}".format(self.nom),
 
 
-@app.route('/', methods=["GET", "POST"])
+@app.route('/ajout', methods=["GET", "POST"])
 def home():
     aliments = None
     if request.form:
         try:
-            aliment = Aliment(nom=request.form.get("nom"),
+            aliment = Aliment(titre=request.form.get("titre"),
                               quantity=request.form.get("quantity"),
                               peremption=datetime.strptime(request.form.get("peremption"), '%Y-%m-%d'),
-                              ajout=datetime.today())
+                              frais=request.form.get("frais"),
+                              ajout=datetime.today(),
+                              desc=request.form.get("desc"),
+                              dlc=request.form.get("dlc"),
+                              nom=request.form.get("nom"))
 
             db.session.add(aliment)
             db.session.commit()
@@ -45,23 +59,30 @@ def home():
     aliments = Aliment.query.all()
     return render_template("ajout.html", aliments=aliments)
 
+
 @app.route("/update", methods=["POST"])
 def update():
     try:
         newtitle = request.form.get("newtitle")
         oldtitle = request.form.get("oldtitle")
-        aliment = Aliment.query.filter_by(nom=oldtitle).first()
-        aliment.nom = newtitle
+        aliment = Aliment.query.filter_by(titre=oldtitle).first()
+        aliment.titre = newtitle
         db.session.commit()
     except Exception as e:
-        print("Couldn't update aliment nom")
+        print("Couldn't update aliment titre")
         print(e)
     return redirect("/")
 
+@app.route('/', methods=["GET", "POST"])
+def list():
+    aliments = Aliment.query.all()
+    return render_template("demo.html", aliments=aliments)
+
+
 @app.route("/delete", methods=["POST"])
 def delete():
-    nom = request.form.get("nom")
-    aliment = Aliment.query.filter_by(nom=nom).first()
+    titre = request.form.get("titre")
+    aliment = Aliment.query.filter_by(titre=titre).first()
     db.session.delete(aliment)
     db.session.commit()
     return redirect("/")
