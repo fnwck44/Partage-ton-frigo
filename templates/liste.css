@@ -1,0 +1,187 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+.main {
+	position: relative;
+	z-index: auto;
+}
+
+.param{
+
+	position: relative;
+	border-radius: 10px;
+	opacity: 1;
+	background-color: rgba(255,255,255,0.7);
+	color :rgba(201,69,57, 1);
+	border-color: rgba(201,69,57, 1);
+	border: solid;
+	border-width: 3px;
+	margin-top: 40px;
+	margin-bottom: 20px;
+	margin-left: 10%;
+	margin-right: 10%;
+
+}
+
+.param > * {
+	margin: 15px 0px 15px 15px;
+}
+
+.param > select {
+	margin: 15px 0px 15px 0px;
+}
+.list {
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-bottom: 10px;
+	min-height: 215px;
+	height: auto;
+	position: relative;
+	border-radius: 10px;
+	opacity: 1;
+	background-color: rgba(255,255,255,0.7);
+	color : rgba(16,33,114,1);
+	border-color: rgba(16,33,114,1);
+	border: solid;
+	border-width: 3px;
+	flex: initial;
+	flex-direction: row;
+}
+
+.text
+{
+	margin-left: 170px;
+	left: 170px;
+	top : 10px;
+	display: flex;
+	flex-direction: column;
+}
+.photo {
+	position: absolute;
+	top:15px;
+	left :15px;
+	max-height: 180px;
+	max-width: 150px;
+
+}
+.name {
+	margin-top: 15px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.cat{
+	font-style: italic;
+	font-weight: normal;
+}
+.description {
+	margin-top: 5px;
+	font-size: 16px;
+}
+.date {
+
+	font-size: 16px;
+	font-style : italic;
+	
+}
+
+.added {
+
+	font-size: 16px;
+	font-style : italic;
+}
+.quantity {
+	margin-top: 20px;
+	font-size: 16px;
+	font-style : italic;
+}
+
+.buttons{
+	position: relative;
+	height: 30px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	min-width: 300px;
+	
+}
+.select {
+	width: 40px;
+	height: 30px;
+
+	left: 170px;
+	font-size: 16px;
+	border-radius: 5px;
+	
+}
+.take {
+	margin-left: 5px;
+	height: 30px;
+	width : 100px;
+	border: 0;
+	line-height: 2.5;
+	padding: 0px 0px;
+	text-align: center;
+ 	vertical-align: middle;
+	font-size: 16px;
+	color: #fff;
+	text-shadow: 1px 1px 1px #000;
+	border-radius: 5px;
+	background-color: rgba(16,33,114,1);
+	background-image: linear-gradient(to top left,  rgba(0, 0, 0, .2),  rgba(0, 0, 0, .2) 30%,  rgba(0, 0, 0, 0));
+	box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),  inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+.take:hover {
+	background-color: rgba(16,33,255,1.00);
+}
+.take:active {
+	box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),  inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+.throw {
+	margin-left: 10px;
+	height: 30px;
+	width : 100px;
+	border: 0;
+	line-height: 2.5;
+	padding: 0px 0px;
+	text-align: center;
+ 	vertical-align: middle;
+	font-size: 16px;
+	color: #fff;
+	text-shadow: 1px 1px 1px #000;
+	border-radius: 5px;
+	background-color: rgba(201,69,57, 1);
+	background-image: linear-gradient(to top left,  rgba(0, 0, 0, .2),  rgba(0, 0, 0, .2) 30%,  rgba(0, 0, 0, 0));
+	box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),  inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+.throw:hover {
+	background-color: rgba(255,69,57, 1);
+}
+.throw:active {
+	box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),  inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+@media screen and (max-width: 1000px){
+	.list{
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	.param{
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	
+	.photo{
+		max-height: 120px;
+		max-width: 80px;
+	}
+	
+	.text {
+		margin-left: 110px;
+	}
+	
+	.buttons {
+		left : -95px;
+	}
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frigo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/form.css') }}">
+
+<style>
+	
+	</style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+<div class="menu">
+<div class="topnav" id="myTopnav">
+  <a class="active" href="index.html"> <b>Partage ton frigo !</b></a>
+    <a href="ajout.html">Ajouter un produit</a>
+  <a href="demo.html">Qu'est-ce que c'est ?</a>
+  <a href="how.html">Comment ça marche ?</a>
+  <a href="#contact">Contact</a>
+  <div class="search-container">
+    <form action="/action_page.php">
+      <input type="text" placeholder="Chercher une denrée" name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+	</div>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+<i class="fa fa-bars"></i>
+  </a>
+</div>
+</div>
+<img  src="{{ url_for('static', filename='img/bas.png') }}" style="position:fixed; bottom: 0px; right: 0px; opacity: 0.5; width:300px;">
+<img  src="{{ url_for('static', filename='img/haut.png') }}" style="position:fixed; top: 0px; left: 0px; opacity: 0.5; width:300px;">
+
+
+<div class="main">
+ <div class="param">
+  <h2 style:>Ajouter un produit</h2>
+  <br>
+  <form class="form" action="" method="post">
+  <label for="POST-name">Vous êtes :</label>
+  <div class="container"></div>
+  <input id="POST-name" type="text" name="nom" placeholder="Nom Prénom" maxlength="40">
+  <br><br>
+  <label for="POST-title">Produit ajouté :</label>
+  <input id="POST-title" type="text" name="titre" placeholder="titre" maxlength="40">
+    <br><br>
+        <label for="POST-cat">Catégorie : </label>
+	<select id="POST-frais" type="text" name="frais">
+		<option value="frais">frais</option>
+		<option value="sec">sec</option>
+	</select>
+   <br><br>
+    <label for="POST-dlc">A consommer : </label>
+	<select name="dlc" id="dlc-type">
+		<option value="avant le">avant le</option>
+		<option value="de préférence avant le">de préférence avant le</option>
+	</select>
+	<input type="Date" id="dlc" name="peremption">
+	<br><br>
+  <label for="POST-description">Description:</label>
+  <textarea id="POST-description" type="text" name="desc" placeholder="facultatif, 150 caractères max" maxlength="150"></textarea>
+  <br><br>
+  <label for="POST-qty">Quantité :</label>
+  
+  <input class="POST-qty" type="number" name="quantity" value="1" min="1" max="10">
+
+    <br><br>
+  <label>Photo :</label>
+  <img class="photo" src="upload.svg">
+  	  <br><br>
+  	  <button class="throw" type="button">Jeter</button>
+  <br><br><br><br><br><br><br><br>
+
+	  <button class="valid" type="submit" value="Add"> Valider </button>
+</form>
+  
+	
+	</div>
+
+<h1>Bloc Test ajout</h1>
+    <table>
+      {% for aliment in aliments %}
+        <tr>
+          <td>
+            {{aliment.id}}
+            {{aliment.frais}}
+            {{aliment.titre}}
+            {{aliment.quantity}}
+            {{aliment.dlc}}
+            {{aliment.peremption}}
+            {{aliment.ajout}}
+            {{aliment.desc}}
+            {{aliment.nom}}
+          </td>
+          <td>
+            <form method="POST" action="./update" style="display: inline">
+              <input type="hidden" value="{{aliment.titre}}" name="oldtitle">
+              <input type="text" value="{{aliment.titre}}" name="newtitle">
+              <input type="submit" value="Update">
+            </form>
+          </td>
+          <td>
+            <form method="POST" action="./delete" style="display: inline">
+              <input type="hidden" value="{{aliment.titre}}" name="titre">
+              <input type="submit" value="Delete">
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+    </table>
+	
+	
+  
+
+	</div>
+<script type="text/javascript">
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
+</body>
+</html>
