@@ -81,12 +81,26 @@ def list():
 
 @app.route("/delete", methods=["POST"])
 def delete():
-    titre = request.form.get("titre")
-    aliment = Aliment.query.filter_by(titre=titre).first()
+    iddelete = request.form.get("id")
+    aliment = Aliment.query.filter_by(id=iddelete).first()
     db.session.delete(aliment)
     db.session.commit()
     return redirect("/")
 
+@app.route("/prendre", methods=["POST"])
+def prendre():
+    idtake = request.form.get("id")
+    take = request.form.get("takeqty")
+    oldqty = request.form.get("qty")
+    aliment = Aliment.query.filter_by(id=idtake).first()
+    aliment.quantity = int(oldqty)-int(take)
+    db.session.commit()
+    if aliment.quantity == 0:
+        db.session.delete(aliment)
+        db.session.commit()
+        return redirect("/")
+    else:
+        return redirect("/")
 
 if __name__ == "__main__":
     app.run(debug=True)
