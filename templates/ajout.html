@@ -36,12 +36,13 @@
 
     <br><br>
 
-  <label>Photo :</label>
-      <div class="photo">
-  <img class="photo" src="lol.png"">
-  	  <br><br>
-  	  <button class="load" type="button">Charger</button>
 
+
+      <div class="photo">
+           <label class="load" for="img">Photo :</label>
+          <input type="">
+  <img id="img" class="photo" src="{{ url_for('static', filename='img/upload.svg') }}"">
+  	  <br><br>
 	</div>
 		  <button class="valid" type="button" value="Enregistrer"> Valider </button>
 
