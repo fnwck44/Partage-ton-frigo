@@ -114,15 +114,12 @@
 }
 
 .photo {
-    position: relative;
-    display : inline-block;
-	display:flex;
-	flex-direction: row;
-  	float: left;
-	margin-bottom: 20px;
+position : absolute;
+
+
 }
 .photo >img {
-    position: relative;
+
 		width: 150px;
 	max-height: 200px;
 }
