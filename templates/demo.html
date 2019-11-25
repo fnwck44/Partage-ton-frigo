@@ -68,9 +68,16 @@
         <span class="added"> Ajouté le {{aliment.ajout}} par {{aliment.nom}} </span>
         <span class="date"> A consommer {{aliment.dlc}} : {{aliment.peremption}}</span>
         <div class="buttons">
-        <input class="select" type="number" name="quantité" value="1" min="1" max="5">
-        <button class="take" type="button">Prendre</button>
-        <button class="throw" type="button">Jeter</button>
+            <form method="POST" action="./prendre" style="display: inline">
+                <input type="hidden" value="{{aliment.id}}" name="id">
+                <input type="hidden" value="{{aliment.quantity}}" name="qty">
+                <input class="select" type="number" name="takeqty" value="1" min="1" max="{{aliment.quantity}}">
+                <input class="take" type="submit" value="Prendre">
+            </form>
+            <form method="POST" action="./delete" style="display: inline">
+                <input type="hidden" value="{{aliment.id}}" name="id">
+                <input class="throw" type="submit" value="Jeter">
+            </form>
 			</div>
 	</div>
 	</div>
