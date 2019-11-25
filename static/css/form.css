@@ -21,7 +21,7 @@
 	margin-bottom: 15%;
 	margin-left: 15%;
 	margin-right: 15%;
-
+	overflow: auto;
 }
 
 .param > * {
@@ -32,6 +32,7 @@
 
 }
 
+
 .form > label {
 	margin-top: 5px;
 	position: relative;
@@ -40,7 +41,7 @@
     display: inline-block;
     float: left;
     clear: left;
-    width: 110px;
+    width: 25%;
 	height: 25px;
     text-align: right;
 	}
@@ -102,7 +103,7 @@
 	border-width: 2px;
 	border-style: inset;
 	border-color: initial;
-	color: rgba(201,69,57, 1);
+
 	margin-left: 10px;
 	flex-wrap: nowrap;
 	color: rgba(201,69,57, 1);
@@ -113,22 +114,20 @@
 }
 
 .photo {
-	width: 150px;
-	max-height: 200px;
-	display: inline-block;
-	display: inline-block;
+
+	display:flex;
+	flex-direction: row;
   	float: left;
-
-
-	
+	margin-bottom: 20px;
+}
+.photo >img {
+		width: 150px;
+	max-height: 200px;
 }
 
-
 .valid {
-	margin-left: 40%;
-	margin-bottom: 15px;
-	height: 30px;
-	width : 100px;
+
+	width : 100%;
 	border: 0;
 	line-height: 2.5;
 	padding: 0px 0px;
@@ -141,6 +140,12 @@
 	background-color: rgba(16,33,114,1);
 	background-image: linear-gradient(to top left,  rgba(0, 0, 0, .2),  rgba(0, 0, 0, .2) 30%,  rgba(0, 0, 0, 0));
 	box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),  inset -2px -2px 3px rgba(0, 0, 0, .6);
+	white-space: nowrap;
+    display: inline-block;
+	margin-left: -7px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	
 
 }
 .valid:hover {
@@ -149,8 +154,14 @@
 .valid:active {
 	box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),  inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
-.throw {
+
+#file {
+visibility:hidden;}
+
+
+.load{
 	margin-left: 10px;
+	margin-top: 20%;
 	height: 30px;
 	width : 100px;
 	border: 0;
@@ -166,10 +177,11 @@
 	background-image: linear-gradient(to top left,  rgba(0, 0, 0, .2),  rgba(0, 0, 0, .2) 30%,  rgba(0, 0, 0, 0));
 	box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),  inset -2px -2px 3px rgba(0, 0, 0, .6);
 }
-.throw:hover {
+
+.load:hover {
 	background-color: rgba(255,69,57, 1);
 }
-.throw:active {
+.load:active {
 	box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),  inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
 
@@ -178,4 +190,5 @@
 		margin-left: 5px;
 		margin-right: 5px;
 
+}
 }
