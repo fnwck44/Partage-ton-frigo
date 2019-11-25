@@ -1,43 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-        <meta charset="UTF-8">
+{% extends "squelette.html" %}
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="menu.css">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<link rel="stylesheet" type="text/css" href="form.css">
-<link rel="stylesheet" type="text/css" href="page.css">
-<style>
-	
-	</style>
-
-</head>
-<body>
-<div class="menu">
-<div class="topnav" id="myTopnav">
-  <a class="active" href="index.html"> <b>Partage ton frigo !</b></a>
-    <a href="ajout.html">Ajouter un produit</a>
-  <a href="demo.html">Qu'est-ce que c'est ?</a>
-  <a href="how.html">Comment ça marche ?</a>
-  <a href="#contact">Contact</a>
-  <div class="search-container">
-    <form action="/action_page.php">
-      <input type="text" placeholder="Chercher une denrée" name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
-	</div>
-  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-<i class="fa fa-bars"></i>
-  </a>
-</div>
-</div>
-<img  src="bas.PNG" style="position:fixed; bottom: 0px; right: 0px; opacity: 0.5; width:300px;">
-<img  src="haut.PNG" style="position:fixed; top: 0px; left: 0px; opacity: 0.5; width:300px;">
-
-
+{% block corps %}
 <div class="main">
  <div class="param">
   <h2 style:>Ajouter un produit</h2>
@@ -45,37 +8,37 @@
   <form class="form" action="" method="post">
   <label for="POST-name">Vous êtes :</label>
   <div class="container"></div>
-  <input id="POST-name" type="text" name="name" placeholder="Nom Prénom" maxlength="40">
+  <input id="POST-name" type="text" name="nom" placeholder="Nom Prénom" maxlength="40">
   <br><br>
   <label for="POST-title">Produit ajouté :</label>
-  <input id="POST-title" type="text" name="title" placeholder="titre" maxlength="40">
+  <input id="POST-title" type="text" name="titre" placeholder="titre" maxlength="40">
     <br><br>
         <label for="POST-cat">Catégorie : </label>
-	<select name="POST-cat" id="cat">
+	<select id="POST-cat" type="text" name="frais">
 		<option value="frais">frais</option>
 		<option value="sec">sec</option>
 	</select>
    <br><br>
     <label for="dlc">A consommer : </label>
-	<select name="dlc-type" id="dlc-type">
-		<option value="dlc">avant le</option>
-		<option value="dluo">de préférence avant le</option>
+	<select name="dlc" id="dlc-type">
+		<option value="avant le">avant le</option>
+		<option value="de préférence avant le">de préférence avant le</option>
 	</select>
-	<input type="date" id="dlc" name="dlc">
+	<input type="date" id="dlc" name="peremption">
 	
 	<br><br>
   <label for="POST-description">Description:</label>
-  <textarea id="POST-description" type="text" name="descrption" placeholder="facultatif, 150 caractères max"></textarea>
+  <textarea id="POST-description" type="text" name="desc" placeholder="facultatif, 150 caractères max" maxlength="150"></textarea>
   <br><br>
   <label for="POST-qty">Quantité :</label>
   
-  <input class="POST-qty" type="number" name="quantité" value="1" min="1" max="10">
+  <input class="POST-qty" type="number" name="quantity" value="1" min="1">
 
     <br><br>
 
   <label>Photo :</label>
       <div class="photo">
-  <img class="photo" src="upload.svg">
+  <img class="photo" src="https://static.openfoodfacts.org/images/products/303/835/288/0206/front_fr.42.full.jpg">
   	  <br><br>
   	  <button class="load" type="button">Charger</button>
 			
@@ -106,6 +69,6 @@ function myFunction() {
   }
 }
 </script>
-
+{% endblock %}
 </body>
 </html>
