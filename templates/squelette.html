@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/liste.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/page.css') }}">
+<style>
+
+	</style>
+
+</head>
+<body>
+<div class="menu">
+<div class="topnav" id="myTopnav">
+  <a class="active" href="/"> <b>Partage ton frigo !</b></a>
+    <a href="ajout">Ajouter un produit</a>
+  <a href="demo.html">Qu'est-ce que c'est ?</a>
+  <a href="how.html">Comment ça marche ?</a>
+  <a href="#contact">Contact</a>
+  <div class="search-container">
+    <form action="/action_page.php">
+      <input type="text" placeholder="Chercher une denrée" name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+	</div>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+<i class="fa fa-bars"></i>
+  </a>
+</div>
+</div>
+<img  src="{{ url_for('static', filename='img/bas.png') }}" style="position:fixed; bottom: 0px; right: 0px; opacity: 0.5; width:300px;">
+<img  src="{{ url_for('static', filename='img/haut.png') }}" style="position:fixed; top: 0px; left: 0px; opacity: 0.5; width:300px;">
+
+        {% block corps %}{% endblock %}
+        {% block footer %}{% endblock %}
+    </body>
+
+</html>
