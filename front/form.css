@@ -154,7 +154,12 @@
 .valid:active {
 	box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),  inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
-.load {
+
+#file {
+visibility:hidden;}
+
+
+.load{
 	margin-left: 10px;
 	margin-top: 20%;
 	height: 30px;
