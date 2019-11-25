@@ -1,43 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <title>Frigo</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/liste.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/page.css') }}">
+{% extends "squelette.html" %}
 
-<style>
-
-	</style>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-</head>
-<body>
-<div class="menu">
-<div class="topnav" id="myTopnav">
-  <a class="active" href=""> <b>Partage ton frigo !</b></a>
-    <a href="ajout">Ajouter un produit</a>
-  <a href="demo.html">Qu'est-ce que c'est ?</a>
-  <a href="how.html">Comment ça marche ?</a>
-  <a href="#contact">Contact</a>
-  <div class="search-container">
-    <form action="/action_page.php">
-      <input type="text" placeholder="Chercher une denrée" name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
-	</div>
-  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-<i class="fa fa-bars"></i>
-  </a>
-</div>
-</div>
-<img  src="{{ url_for('static', filename='img/bas.png') }}" style="position:fixed; bottom: 0px; right: 0px; opacity: 0.5; width:300px;">
-<img  src="{{ url_for('static', filename='img/haut.png') }}" style="position:fixed; top: 0px; left: 0px; opacity: 0.5; width:300px;">
+{% block corps %}
 <div class="main">
  <div class="param">
   <h2 style:>Denrées disponibles</h2>
   <label for="order">Trier par :</label>
-  
+
 
 	<select name="order" id="order">
 		<option value="date+">date d'ajout croissante</option>
@@ -46,7 +14,7 @@
 		<option value="dlc-">date de péremption décroissante</option>
 		<option value="name">ordre alphabétique</option>
 	</select>
-	
+
 	  <label for="filter">Filtrage :</label>
 
 	<select name="filter" id="filter">
@@ -58,7 +26,8 @@
 	</select>
 
 	</div>
-    {% for aliment in aliments %}
+
+{% for aliment in aliments %}
 	<div class="list">
       <img class="photo" src="https://static.openfoodfacts.org/images/products/303/835/288/0206/front_fr.42.full.jpg">
         <div class="text">
@@ -79,9 +48,10 @@
                 <input class="throw" type="submit" value="Jeter">
             </form>
 			</div>
-	</div>
-	</div>
-    {% endfor %}
+{% endfor %}
+
+
+
 	</div>
 <script type="text/javascript">
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
@@ -94,6 +64,6 @@ function myFunction() {
   }
 }
 </script>
-
+{% endblock %}
 </body>
 </html>
