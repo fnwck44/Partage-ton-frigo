@@ -37,11 +37,11 @@
     <br><br>
 
 
-
+<label>Photo :</label>
       <div class="photo">
-           <label class="load" for="img">Photo :</label>
-          <input type="">
-  <img id="img" class="photo" src="{{ url_for('static', filename='img/upload.svg') }}"">
+           <label class="load" for="file">Charger</label>
+          <input id="file" type="input"  accept="image/png, image/jpeg">
+  <img src="{{ url_for('static', filename='img/upload.svg') }}"">
   	  <br><br>
 	</div>
 		  <button class="valid" type="button" value="Enregistrer"> Valider </button>
