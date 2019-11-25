@@ -3,14 +3,7 @@
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/liste.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/page.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/form.css') }}">
-<style>
-
-	</style>
+        {% block head %}{% endblock %}
 
 </head>
 <body>
@@ -19,7 +12,7 @@
   <a class="active" href="/"> <b>Partage ton frigo !</b></a>
     <a href="ajout">Ajouter un produit</a>
   <a href="demo.html">Qu'est-ce que c'est ?</a>
-  <a href="how.html">Comment ça marche ?</a>
+  <a href="how">Comment ça marche ?</a>
   <a href="#contact">Contact</a>
   <div class="search-container">
     <form action="/action_page.php">
