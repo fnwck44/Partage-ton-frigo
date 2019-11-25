@@ -58,6 +58,7 @@ span.cls_005 {
 	text-decoration: none
 }
 div.cls_005 {
+    width : 20%;
 	font-family: Arial, serif;
 	font-size: 16px;
 	color: rgb(255,255,255);
@@ -81,4 +82,15 @@ div.cls_006 {
 	font-weight: normal;
 	font-style: italic;
 	text-decoration: none
+}
+ul.cls_002 {
+    font-family: Arial, serif;
+	font-size: 16px;
+	color: rgb(15,32,114);
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none
+}
+div.boxes {
+    display : flex;
 }
