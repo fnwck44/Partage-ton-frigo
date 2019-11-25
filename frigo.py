@@ -102,5 +102,8 @@ def prendre():
     else:
         return redirect("/")
 
+@app.route('/how')
+def how():
+    return render_template("how.html")
 if __name__ == "__main__":
     app.run(debug=True)
