@@ -76,6 +76,7 @@ def update():
 @app.route('/', methods=["GET", "POST"])
 def list():
     aliments = Aliment.query.all()
+    aliments = Aliment.query.order_by(func.max(ajout.Aliment))
     return render_template("demo.html", aliments=aliments)
 
 
@@ -86,6 +87,7 @@ def delete():
     db.session.delete(aliment)
     db.session.commit()
     return redirect("/")
+
 
 @app.route("/prendre", methods=["POST"])
 def prendre():
