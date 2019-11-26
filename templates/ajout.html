@@ -1,5 +1,10 @@
 {% extends "squelette.html" %}
 
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/form.css') }}">
+{% endblock %}
+
 {% block corps %}
 <div class="main">
  <div class="param">

@@ -76,7 +76,6 @@ def update():
 @app.route('/', methods=["GET", "POST"])
 def list():
     aliments = Aliment.query.all()
-    aliments = Aliment.query.order_by(func.max(ajout.Aliment))
     return render_template("demo.html", aliments=aliments)
 
 
