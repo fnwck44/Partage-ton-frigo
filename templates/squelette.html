@@ -30,6 +30,30 @@
 <img  src="{{ url_for('static', filename='img/bas.PNG') }}" style="position:fixed; bottom: 0px; right: 0px; opacity: 0.5; width:300px;">
 <img  src="{{ url_for('static', filename='img/haut.PNG') }}" style="position:fixed; top: 0px; left: 0px; opacity: 0.5; width:300px;">
 
+<script type="text/javascript">
+
+
+function popup() {
+  var txt;
+  var r = confirm("Êtes vous sûr ?");
+  if (r == true) {
+    txt = "You pressed OK!";
+  } else {
+    txt = "You pressed Cancel!";
+  }
+  document.getElementById("demo").innerHTML = txt;
+}
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
+
         {% block corps %}{% endblock %}
         {% block footer %}{% endblock %}
     </body>
