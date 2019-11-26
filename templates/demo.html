@@ -9,9 +9,8 @@
 <div class="main">
  <div class="param">
   <h2>Denrées disponibles</h2>
+  <form class="form" action="" method="post">
   <label for="order">Trier par :</label>
-
-
 	<select name="order" id="order">
 		<option value="date+">date d'ajout croissante</option>
 		<option value="date-">date d'ajout décroissante</option>
@@ -19,9 +18,7 @@
 		<option value="dlc-">date de péremption décroissante</option>
 		<option value="name">ordre alphabétique</option>
 	</select>
-
 	  <label for="filter">Filtrage :</label>
-
 	<select name="filter" id="filter">
 		<option value="none">aucun</option>
 		<option value="sec">au sec</option>
@@ -29,7 +26,8 @@
 		<option value="ok">non périmé</option>
 		<option value="perime">périmé</option>
 	</select>
-
+      <button class="take" type="submit" value="Add"> Appliquer </button>
+</form>
 	</div>
 
     {% for aliment in aliments %}
