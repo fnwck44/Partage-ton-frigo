@@ -1,10 +1,12 @@
 import os
+import sys
 from datetime import datetime
 from flask import Flask
 from flask import redirect
 from flask import render_template
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc, select
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "database.db"))
@@ -33,7 +35,7 @@ class Aliment(db.Model):
                "Ajout:{}".format(self.ajout), \
                "frais:{}".format(self.frais), \
                "desc:{}".format(self.desc), \
-               "dlc:{}".format(self.dlc),\
+               "dlc:{}".format(self.dlc), \
                "nom:{}".format(self.nom),
 
 
@@ -73,12 +75,35 @@ def update():
         print(e)
     return redirect("/")
 
+
 @app.route('/', methods=["GET", "POST"])
 def list():
-    aliments = Aliment.query.all()
-    aliments = Aliment.query.order_by(func.max(ajout.Aliment))
-    return render_template("demo.html", aliments=aliments)
+    filter = request.form.get("filter")
+    order=request.form.get("order")
+    if filter == "sec":
+        aliments = Aliment.query.filter_by(frais='sec')
+    elif filter == "frais":
+        aliments = Aliment.query.filter_by(frais='frais')
+    elif filter == "ok":
+        ajd = datetime.today()
+        aliments = Aliment.query.filter(Aliment.peremption > ajd)
+    elif filter =="perime":
+        ajd = datetime.today()
+        aliments = Aliment.query.filter(Aliment.peremption < ajd)
+    elif order =="date+":
+        aliments = Aliment.query.order_by(Aliment.ajout)
+    elif order =="date-":
+        aliments = Aliment.query.order_by(desc(Aliment.ajout))
+    elif order == "dlc+":
+        aliments = Aliment.query.order_by(Aliment.peremption)
+    elif order == "dlc-":
+        aliments = Aliment.query.order_by(desc(Aliment.peremption))
+    elif order == "name":
+        aliments = Aliment.query.order_by(Aliment.titre)
+    else:
+        aliments = Aliment.query.order_by(desc(Aliment.ajout))
 
+    return render_template("demo.html", aliments=aliments)
 
 @app.route("/delete", methods=["POST"])
 def delete():
@@ -95,7 +120,7 @@ def prendre():
     take = request.form.get("takeqty")
     oldqty = request.form.get("qty")
     aliment = Aliment.query.filter_by(id=idtake).first()
-    aliment.quantity = int(oldqty)-int(take)
+    aliment.quantity = int(oldqty) - int(take)
     db.session.commit()
     if aliment.quantity == 0:
         db.session.delete(aliment)
@@ -104,8 +129,11 @@ def prendre():
     else:
         return redirect("/")
 
+
 @app.route('/how')
 def how():
     return render_template("how.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,12 +1,16 @@
 {% extends "squelette.html" %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/liste.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/page.css') }}">
+{% endblock %}
+
 {% block corps %}
 <div class="main">
  <div class="param">
   <h2>Denrées disponibles</h2>
+  <form class="form" action="" method="post">
   <label for="order">Trier par :</label>
-
-
 	<select name="order" id="order">
 		<option value="date+">date d'ajout croissante</option>
 		<option value="date-">date d'ajout décroissante</option>
@@ -14,9 +18,7 @@
 		<option value="dlc-">date de péremption décroissante</option>
 		<option value="name">ordre alphabétique</option>
 	</select>
-
 	  <label for="filter">Filtrage :</label>
-
 	<select name="filter" id="filter">
 		<option value="none">aucun</option>
 		<option value="sec">au sec</option>
@@ -24,10 +26,11 @@
 		<option value="ok">non périmé</option>
 		<option value="perime">périmé</option>
 	</select>
-
+      <button class="take" type="submit" value="Add"> Appliquer </button>
+</form>
 	</div>
 
-{% for aliment in aliments %}
+    {% for aliment in aliments %}
 	<div class="list">
       <img class="photo" src="https://static.openfoodfacts.org/images/products/303/835/288/0206/front_fr.42.full.jpg">
         <div class="text">
@@ -48,11 +51,9 @@
                 <input class="throw" type="submit" value="Jeter">
             </form>
 			</div>
-{% endfor %}
-
-
-
+        </div>
 	</div>
+    {% endfor %}
 <script type="text/javascript">
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
