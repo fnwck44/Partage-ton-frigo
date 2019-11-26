@@ -1,4 +1,8 @@
-{% extends "squelette.html" %}
+{% extends "squelette.html" %
+
+{% block head %}
+
+
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
@@ -8,7 +12,7 @@
 {% block corps %}
 <div class="main">
  <div class="param">
-  <h2 style:>Ajouter un produit</h2>
+  <h2 >Ajouter un produit</h2>
   <br>
   <form class="form" action="" method="post">
   <label for="POST-name">Vous êtes :</label>
@@ -35,7 +39,7 @@
   <label for="POST-description">Description:</label>
   <textarea id="POST-description" type="text" name="desc" placeholder="facultatif, 150 caractères max" maxlength="150"></textarea>
   <br><br>
-  <label for="POST-qty">Quantité :</label>
+  <label>Quantité :</label>
 
   <input class="POST-qty" type="number" name="quantity" value="1" min="1">
 
@@ -46,7 +50,7 @@
       <div class="photo">
           <label class="load" for="file">Charger</label>
           <input id="file" type="file"  accept="image/png, image/jpeg">
-  <img src="{{ url_for('static', filename='img/upload.svg') }}"">
+  <img src="{{ url_for('static', filename='img/upload.svg') }}">
   	  <br><br>
 	</div>
 		  <button class="valid" type="submit" value="Enregistrer"> Valider </button>
@@ -64,17 +68,9 @@
 
 	</div>
 
-<script type="text/javascript">
-/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
-function myFunction() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-</script>
+
+
+
 {% endblock %}
 </body>
 </html>
