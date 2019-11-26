@@ -6,6 +6,7 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc, select
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "database.db"))
@@ -78,6 +79,7 @@ def update():
 @app.route('/', methods=["GET", "POST"])
 def list():
     filter = request.form.get("filter")
+    order=request.form.get("order")
     if filter == "sec":
         aliments = Aliment.query.filter_by(frais='sec')
     elif filter == "frais":
@@ -88,11 +90,20 @@ def list():
     elif filter =="perime":
         ajd = datetime.today()
         aliments = Aliment.query.filter(Aliment.peremption < ajd)
+    elif order =="date+":
+        aliments = Aliment.query.order_by(Aliment.ajout)
+    elif order =="date-":
+        aliments = Aliment.query.order_by(desc(Aliment.ajout))
+    elif order == "dlc+":
+        aliments = Aliment.query.order_by(Aliment.peremption)
+    elif order == "dlc-":
+        aliments = Aliment.query.order_by(desc(Aliment.peremption))
+    elif order == "name":
+        aliments = Aliment.query.order_by(Aliment.titre)
     else:
-        aliments = Aliment.query.all()
+        aliments = Aliment.query.order_by(desc(Aliment.ajout))
 
     return render_template("demo.html", aliments=aliments)
-
 
 @app.route("/delete", methods=["POST"])
 def delete():
