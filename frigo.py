@@ -1,19 +1,23 @@
 import os
 import sys
 from datetime import datetime
-from flask import Flask
+from flask import Flask,session
 from flask import redirect
 from flask import render_template
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import desc, select
+from sqlalchemy import desc
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+from flask_admin.contrib.fileadmin import FileAdmin
+import os.path as op
+from flask_basicauth import BasicAuth
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "database.db"))
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_file
-
 db: SQLAlchemy = SQLAlchemy(app)
 
 
@@ -38,6 +42,11 @@ class Aliment(db.Model):
                "dlc:{}".format(self.dlc), \
                "nom:{}".format(self.nom),
 
+
+admin = Admin(app)
+admin.add_view(ModelView(Aliment, db.session))
+path = op.join(op.dirname(__file__), 'static')
+admin.add_view(FileAdmin(path, '/static/', name='Static Files'))
 
 @app.route('/ajout', methods=["GET", "POST"])
 def home():
@@ -79,7 +88,7 @@ def update():
 @app.route('/', methods=["GET", "POST"])
 def list():
     filter = request.form.get("filter")
-    order=request.form.get("order")
+    order = request.form.get("order")
     if filter == "sec":
         aliments = Aliment.query.filter_by(frais='sec')
     elif filter == "frais":
@@ -87,12 +96,12 @@ def list():
     elif filter == "ok":
         ajd = datetime.today()
         aliments = Aliment.query.filter(Aliment.peremption > ajd)
-    elif filter =="perime":
+    elif filter == "perime":
         ajd = datetime.today()
         aliments = Aliment.query.filter(Aliment.peremption < ajd)
-    elif order =="date+":
+    elif order == "date+":
         aliments = Aliment.query.order_by(Aliment.ajout)
-    elif order =="date-":
+    elif order == "date-":
         aliments = Aliment.query.order_by(desc(Aliment.ajout))
     elif order == "dlc+":
         aliments = Aliment.query.order_by(Aliment.peremption)
@@ -104,6 +113,7 @@ def list():
         aliments = Aliment.query.order_by(desc(Aliment.ajout))
 
     return render_template("demo.html", aliments=aliments)
+
 
 @app.route("/delete", methods=["POST"])
 def delete():
@@ -136,4 +146,9 @@ def how():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.secret_key = os.urandom(24)
+    app.config['BASIC_AUTH_USERNAME'] = 'test'
+    app.config['BASIC_AUTH_PASSWORD'] = '123'
+    basic_auth = BasicAuth(app)
+    app.debug = True
+    app.run()
