@@ -155,8 +155,7 @@ position : absolute;
 }
 
 #file {
-visibility : visible;
-}
+visibility:hidden;}
 
 
 .load{

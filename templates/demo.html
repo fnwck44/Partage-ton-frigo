@@ -26,7 +26,7 @@
 		<option value="ok">non périmé</option>
 		<option value="perime">périmé</option>
 	</select>
-      <button class="take" type="submit" value="Add" onclick="popup()"> Appliquer </button>
+      <button class="take" type="submit" value="Add"> Appliquer </button>
 </form>
 	</div>
 
@@ -44,17 +44,27 @@
                 <input type="hidden" value="{{aliment.id}}" name="id">
                 <input type="hidden" value="{{aliment.quantity}}" name="qty">
                 <input class="select" type="number" name="takeqty" value="1" min="1" max="{{aliment.quantity}}">
-                <input class="take" type="submit" value="Prendre" onclick="popup()">
+                <input class="take" type="submit" value="Prendre">
             </form>
             <form method="POST" action="./delete" style="display: inline">
                 <input type="hidden" value="{{aliment.id}}" name="id">
-                <input class="throw" type="submit" value="Jeter" onclick="popup()">
+                <input class="throw" type="submit" value="Jeter">
             </form>
 			</div>
         </div>
 	</div>
     {% endfor %}
-
+<script type="text/javascript">
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
 {% endblock %}
 </body>
 </html>
