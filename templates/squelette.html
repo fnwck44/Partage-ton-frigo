@@ -15,7 +15,7 @@
 <div class="topnav" id="myTopnav">
   <a class="active" href="/"> <b>Partage ton frigo !</b></a>
     <a href="ajout">Ajouter un produit</a>
-  <a href="demo.html">Qu'est-ce que c'est ?</a>
+  <a href="what">Qu'est-ce que c'est ?</a>
   <a href="how">Comment ça marche ?</a>
   <a href="admin">Administration</a>
   <div class="search-container">
@@ -24,13 +24,29 @@
       <button type="submit">🔍</button>
     </form>
 	</div>
-  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-<i class="fa fa-bars"></i>
+  <a href="javascript:void(0);" class="icon" onclick="menu()">
+      <b>|||</b>
   </a>
 </div>
 </div>
 <img  src="{{ url_for('static', filename='img/bas.PNG') }}" style="position:fixed; bottom: 0px; right: 0px; opacity: 0.5; width:300px;">
 <img  src="{{ url_for('static', filename='img/haut.PNG') }}" style="position:fixed; top: 0px; left: 0px; opacity: 0.5; width:300px;">
+
+<script type="text/javascript">
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function menu() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+
+function confirmer() {
+  confirm("Êtes vous sûr ?");
+}
+</script>
 
         {% block corps %}{% endblock %}
         {% block footer %}{% endblock %}

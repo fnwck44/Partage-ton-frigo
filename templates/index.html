@@ -1,47 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="menu.css">
+{% extends "squelette.html" %}
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/liste.css') }}">
+{% endblock %}
 
-<link rel="stylesheet" type="text/css" href="liste.css">
-
-<style>
-	
-	</style>
-
-</head>
-<body>
-<div class="menu">
-<div class="topnav" id="myTopnav">
-  <a class="active" href="index.html"> <b>Partage ton frigo !</b></a>
-    <a href="ajout.html">Ajouter un produit</a>
-  <a href="demo.html">Qu'est-ce que c'est ?</a>
-  <a href="how.html">Comment ça marche ?</a>
-  <a href="#contact">Contact</a>
-  <div class="search-container">
-    <form action="/action_page.php">
-      <input type="text" placeholder="Chercher une denrée" name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
-	</div>
-  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-<i class="fa fa-bars"></i>
-  </a>
-</div>
-</div>
-<img  src="bas.PNG" style="position:fixed; bottom: 0px; right: 0px; opacity: 0.5; width:300px;">
-<img  src="haut.PNG" style="position:fixed; top: 0px; left: 0px; opacity: 0.5; width:300px;">
-
-
+{% block corps %}
 <div class="main">
  <div class="param">
-  <h2 style:>Denrées disponibles</h2>
+  <h2>Denrées disponibles</h2>
+  <form class="form" action="" method="post">
   <label for="order">Trier par :</label>
-  
-
 	<select name="order" id="order">
 		<option value="date+">date d'ajout croissante</option>
 		<option value="date-">date d'ajout décroissante</option>
@@ -49,9 +17,7 @@
 		<option value="dlc-">date de péremption décroissante</option>
 		<option value="name">ordre alphabétique</option>
 	</select>
-	
 	  <label for="filter">Filtrage :</label>
-
 	<select name="filter" id="filter">
 		<option value="none">aucun</option>
 		<option value="sec">au sec</option>
@@ -59,12 +25,34 @@
 		<option value="ok">non périmé</option>
 		<option value="perime">périmé</option>
 	</select>
-	
+      <button class="take" type="submit" value="Add"> Appliquer </button>
+</form>
 	</div>
-	
 
-
+    {% for aliment in aliments %}
+	<div class="list">
+      <img class="photo" src="https://static.openfoodfacts.org/images/products/303/835/288/0206/front_fr.42.full.jpg">
+        <div class="text">
+        <span class="name">{{aliment.titre}}<span class="cat"> - {{aliment.frais}}</span></span>
+        <span class="description">{{aliment.desc}}</span>
+        <span class="quantity">Quantité disponible : {{aliment.quantity}} </span>
+        <span class="added"> Ajouté le {{aliment.ajout}} par {{aliment.nom}} </span>
+        <span class="date"> A consommer {{aliment.dlc}} : {{aliment.peremption}}</span>
+        <div class="buttons">
+            <form method="POST" action="./prendre" style="display: inline">
+                <input type="hidden" value="{{aliment.id}}" name="id">
+                <input type="hidden" value="{{aliment.quantity}}" name="qty">
+                <input class="select" type="number" name="takeqty" value="1" min="1" max="{{aliment.quantity}}">
+                <input class="take" type="submit" value="Prendre">
+            </form>
+            <form method="POST" action="./delete" style="display: inline">
+                <input type="hidden" value="{{aliment.id}}" name="id">
+                <input class="throw" type="submit" value="Jeter">
+            </form>
+			</div>
+        </div>
 	</div>
+    {% endfor %}
 <script type="text/javascript">
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
@@ -76,6 +64,6 @@ function myFunction() {
   }
 }
 </script>
-
+{% endblock %}
 </body>
 </html>

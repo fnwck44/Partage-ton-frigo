@@ -112,7 +112,7 @@ def list():
     else:
         aliments = Aliment.query.order_by(desc(Aliment.ajout))
 
-    return render_template("demo.html", aliments=aliments)
+    return render_template("index.html", aliments=aliments)
 
 
 @app.route("/delete", methods=["POST"])
@@ -144,6 +144,9 @@ def prendre():
 def how():
     return render_template("how.html")
 
+@app.route('/what')
+def what():
+    return render_template("what.html")
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
