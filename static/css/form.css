@@ -114,12 +114,12 @@
 }
 
 .photo {
-position : absolute;
+position : relative;
 
 
 }
 .photo >img {
-
+       position : relative;
 		width: 150px;
 	max-height: 200px;
 }
@@ -159,6 +159,7 @@ visibility:hidden;}
 
 
 .load{
+    position: relative;
 	margin-left: 10px;
 	margin-top: 20%;
 	height: 30px;
