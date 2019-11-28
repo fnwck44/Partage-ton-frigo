@@ -74,6 +74,7 @@ body {
   margin-top: 0px;
   font-size: 17px;
   border: none;
+  height:32px;
 }
 
 .topnav .search-container button {
