@@ -13,7 +13,7 @@
 	position: relative;
 	border-radius: 10px;
 	opacity: 1;
-	background-color: rgba(255,255,255,0.7);
+	background-color: rgba(255,230,230,0.8);
 	color :rgba(201,69,57, 1);
 	border-color: rgba(201,69,57, 1);
 	border: solid;
@@ -41,7 +41,7 @@
 	position: relative;
 	border-radius: 10px;
 	opacity: 1;
-	background-color: rgba(255,255,255,0.7);
+	background-color: rgba(230,230,255,0.8);
 	color : rgba(16,33,114,1);
 	border-color: rgba(16,33,114,1);
 	border: solid;

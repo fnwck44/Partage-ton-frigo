@@ -7,66 +7,62 @@
 
 {% block corps %}
 <div class="main">
- <div class="param">
-  <h2>Ajouter un produit</h2>
-  <br>
-  <form class="form" action="" method="post">
-  <label for="POST-name">Vous êtes :</label>
-  <div class="container"></div>
-  <input id="POST-name" type="text" name="nom" placeholder="Nom Prénom" maxlength="40">
-  <br><br>
-  <label for="POST-title">Produit ajouté :</label>
-  <input id="POST-title" type="text" name="titre" placeholder="titre" maxlength="40">
-    <br><br>
-        <label for="POST-cat">Catégorie : </label>
-          <span class="break"></span>
-	<select class="select" id="POST-cat" type="text" name="frais">
-		<option value="frais">frais</option>
-		<option value="sec">sec</option>
-	</select>
-   <br><br>
-    <label for="dlc">A consommer : </label>
-    <span class="break"></span>
-	<select class="select" name="dlc" id="dlc-type">
-		<option value="avant le">avant le</option>
-		<option value="de préférence avant le">de préférence avant le</option>
-	<input class="dlc" type="date" id="dlc" name="peremption">
+    <div class="param">
+        <h2>Ajouter un produit</h2>
+        <br>
+        <form class="form" action="" method="post">
+            <label for="POST-name">Vous êtes :</label>
+            <div class="container"></div>
+            <input id="POST-name" type="text" name="nom" placeholder="Nom Prénom" maxlength="40">
+            <br><br>
+            <label for="POST-title">Produit ajouté :</label>
+            <input id="POST-title" type="text" name="titre" placeholder="titre" maxlength="40">
+            <br><br>
+            <label for="POST-cat">Catégorie : </label>
+            <span class="break"></span>
+            <select class="select" id="POST-cat" type="text" name="frais">
+                <option value="frais">frais</option>
+                <option value="sec">sec</option>
+            </select>
+            <br><br>
+            <label for="dlc">A consommer : </label>
+            <span class="break"></span>
+            <select class="select" name="dlc" id="dlc-type">
+                <option value="avant le">avant le</option>
+                <option value="de préférence avant le">de préférence avant le</option>
+                <input class="dlc" type="date" id="dlc" name="peremption">
 
-	<br><br>
-  <label for="POST-description">Description:</label>
-  <textarea id="POST-description" type="text" name="desc" placeholder="facultatif, 150 caractères max" maxlength="150"></textarea>
-  <br><br>
-  <label for="POST-qty">Quantité :</label>
+                <br><br>
+                <label for="POST-description">Description:</label>
+                <textarea id="POST-description" type="text" name="desc" placeholder="facultatif, 150 caractères max"
+                          maxlength="150"></textarea>
+                <br><br>
+                <label for="POST-qty">Quantité :</label>
 
-  <input class="POST-qty" type="number" name="quantity" value="1" min="1">
+                <input id="POST-qty" type="number" name="quantity" value="1" min="1">
 
-    <br><br>
-
-
-<label>Photo :</label>
-
-  <img src="{{ url_for('static', filename='img/upload.svg') }}">
-
-	  <br><br>
-<input class="pic" type="file"
-       id="pic" name="pic"
-       accept="image/png, image/jpeg">
-
-  	  <br><br>
-		  <button class="valid" type="submit" value="Enregistrer"> Valider </button>
-
-</form>
+                <br><br>
 
 
-	</div>
+                <label>Photo :</label>
+
+                <img src="{{ url_for('static', filename='img/upload.svg') }}">
+
+                <br><br>
+                <input class="pic" type="file"
+                       id="pic" name="pic"
+                       accept="image/png, image/jpeg">
+
+                <br><br>
+                <button class="valid" type="button" value="Enregistrer" onclick="save(this)"> Valider</button>
+
+        </form>
 
 
+    </div>
 
 
-
-
-
-	</div>
+</div>
 
 
 {% endblock %}

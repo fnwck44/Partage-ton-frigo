@@ -6,64 +6,56 @@
 
 {% block corps %}
 <div class="main">
- <div class="param">
-  <h2>Denrées disponibles</h2>
-  <form class="form" action="" method="post">
-  <label for="order">Trier par :</label>
-	<select name="order" id="order">
-		<option value="date+">date d'ajout croissante</option>
-		<option value="date-">date d'ajout décroissante</option>
-		<option value="dlc+">date de péremption croissante</option>
-		<option value="dlc-">date de péremption décroissante</option>
-		<option value="name">ordre alphabétique</option>
-	</select>
-	  <label for="filter">Filtrage :</label>
-	<select name="filter" id="filter">
-		<option value="none">aucun</option>
-		<option value="sec">au sec</option>
-		<option value="frais">au frais</option>
-		<option value="ok">non périmé</option>
-		<option value="perime">périmé</option>
-	</select>
-      <button class="take" type="submit" value="Add"> Appliquer </button>
-</form>
-	</div>
+    <div class="param">
+        <h2>Denrées disponibles</h2>
+        <form class="form" action="" method="post">
+            <label for="order">Trier par :</label>
+            <select name="order" id="order">
+                <option value="date+">date d'ajout croissante</option>
+                <option value="date-">date d'ajout décroissante</option>
+                <option value="dlc+">date de péremption croissante</option>
+                <option value="dlc-">date de péremption décroissante</option>
+                <option value="name">ordre alphabétique</option>
+            </select>
+            <label for="filter">Filtrage :</label>
+            <select name="filter" id="filter">
+                <option value="none">aucun</option>
+                <option value="sec">au sec</option>
+                <option value="frais">au frais</option>
+                <option value="ok">non périmé</option>
+                <option value="perime">périmé</option>
+            </select>
+            <button class="take" type="submit" value="Add"> Appliquer</button>
+        </form>
+    </div>
 
     {% for aliment in aliments %}
-	<div class="list">
-      <img class="photo" src="https://static.openfoodfacts.org/images/products/303/835/288/0206/front_fr.42.full.jpg">
+    <div class="list">
+        <img class="photo" src="https://static.openfoodfacts.org/images/products/303/835/288/0206/front_fr.42.full.jpg">
         <div class="text">
-        <span class="name">{{aliment.titre}}<span class="cat"> - {{aliment.frais}}</span></span>
-        <span class="description">{{aliment.desc}}</span>
-        <span class="quantity">Quantité disponible : {{aliment.quantity}} </span>
-        <span class="added"> Ajouté le {{aliment.ajout}} par {{aliment.nom}} </span>
-        <span class="date"> A consommer {{aliment.dlc}} : {{aliment.peremption}}</span>
-        <div class="buttons">
-            <form method="POST" action="./prendre" style="display: inline">
-                <input type="hidden" value="{{aliment.id}}" name="id">
-                <input type="hidden" value="{{aliment.quantity}}" name="qty">
-                <input class="select" type="number" name="takeqty" value="1" min="1" max="{{aliment.quantity}}">
-                <input class="take" type="submit" value="Prendre">
-            </form>
-            <form method="POST" action="./delete" style="display: inline">
-                <input type="hidden" value="{{aliment.id}}" name="id">
-                <input class="throw" type="submit" value="Jeter">
-            </form>
-			</div>
+            <span class="name">{{aliment.titre}}<span class="cat"> - {{aliment.frais}}</span></span>
+            <span class="description">{{aliment.desc}}</span>
+            <span class="quantity">Quantité disponible : {{aliment.quantity}} </span>
+            <span class="added"> Ajouté le {{aliment.ajout}} par {{aliment.nom}} </span>
+            <span class="date"> A consommer {{aliment.dlc}} : {{aliment.peremption}}</span>
+            <div class="buttons">
+                <form method="POST" action="./prendre" style="display: inline">
+                    <input type="hidden" value="{{aliment.id}}" name="id">
+                    <input class="name" type="hidden" value="{{aliment.titre}}" name="name">
+                    <input type="hidden" value="{{aliment.quantity}}" name="qty">
+                    <input class="select" type="number" name="takeqty" value="1" min="1" max="{{aliment.quantity}}">
+                    <input class="take" type="button" value="Prendre" onclick="take(this)">
+                </form>
+                <form method="POST" action="./delete" style="display: inline">
+                    <input type="hidden" value="{{aliment.id}}" name="id">
+                    <input class="name" type="hidden" value="{{aliment.titre}}" name="name">
+                    <input class="throw" type="button" value="Jeter" onclick="discard(this)">
+                </form>
+            </div>
         </div>
-	</div>
+    </div>
     {% endfor %}
-<script type="text/javascript">
-/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
-function myFunction() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-</script>
-{% endblock %}
-</body>
-</html>
+
+    {% endblock %}
+    </body>
+    </html>

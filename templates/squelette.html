@@ -43,9 +43,33 @@ function menu() {
   }
 }
 
-function confirmer() {
-  confirm("Êtes vous sûr ?");
+function take(elem) {
+    form=elem.parentNode;
+    var q=form.getElementsByClassName("select")[0].value;
+    var n=form.getElementsByClassName("name")[0].value;
+  r=confirm("Êtes vous sûr de prendre "+q+" '"+n+"' ?");
+  if(r){
+    form.submit();
+    }
+   }
+
+function discard(elem) {
+    form=elem.parentNode;
+    n=form.getElementsByClassName("name")[0].value;
+  r=confirm("Êtes vous sûr de jeter '"+ n +"' ?");
+  if(r){
+    form.submit();
+    }
 }
+function save(elem) {
+    form=elem.parentNode;
+  r=confirm("Êtes vous sûr d'ajouter cet aliment ?");
+  if(r){
+    form.submit();
+    }
+   }
+
+
 </script>
 
         {% block corps %}{% endblock %}
