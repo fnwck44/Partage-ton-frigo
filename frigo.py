@@ -48,7 +48,7 @@ admin.add_view(ModelView(Aliment, db.session))
 path = op.join(op.dirname(__file__), 'static')
 admin.add_view(FileAdmin(path, '/static/', name='Static Files'))
 
-@app.route('/ajout', methods=["GET", "POST"])
+@app.route('/add', methods=["GET", "POST"])
 def home():
     aliments = None
     if request.form:
@@ -68,7 +68,7 @@ def home():
             print("Failed to add aliment")
             print(e)
     aliments = Aliment.query.all()
-    return render_template("ajout.html", aliments=aliments)
+    return render_template("add.html", aliments=aliments)
 
 
 @app.route("/update", methods=["POST"])
