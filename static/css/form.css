@@ -154,11 +154,11 @@ position : relative;
 	box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),  inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
 
-#file {
+.photo > input {
 visibility:hidden;}
 
 
-.load{
+.pic > input#pic{
     position: relative;
 	margin-left: 10px;
 	margin-top: 20%;
@@ -178,10 +178,10 @@ visibility:hidden;}
 	box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),  inset -2px -2px 3px rgba(0, 0, 0, .6);
 }
 
-.load:hover {
+.pic > input#pic{
 	background-color: rgba(255,69,57, 1);
 }
-.load:active {
+.pic > input#pic{
 	box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),  inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
 

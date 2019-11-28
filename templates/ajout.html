@@ -8,7 +8,7 @@
 {% block corps %}
 <div class="main">
  <div class="param">
-  <h2 style:>Ajouter un produit</h2>
+  <h2>Ajouter un produit</h2>
   <br>
   <form class="form" action="" method="post">
   <label for="POST-name">Vous êtes :</label>
@@ -43,11 +43,17 @@
 
 
 <label>Photo :</label>
-          <label
-                  class="load" for="file">Charger</label>
-          <input id="file" type="input"  accept="image/png, image/jpeg">
+      <div>
+
   <img src="{{ url_for('static', filename='img/upload.svg') }}">
+          <label class="load" for="pic">Charger:</label>
+
+<input class="pic" type="file"
+       id="pic" name="pic"
+       accept="image/png, image/jpeg">
+
   	  <br><br>
+	</div>
 		  <button class="valid" type="submit" value="Enregistrer"> Valider </button>
 
 </form>
