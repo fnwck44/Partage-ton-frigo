@@ -53,7 +53,7 @@
 	border-radius: 5px;
 	margin-left: 10px;
 	flex-wrap: nowrap;
-	color: rgba(201,69,57, 1);
+	color: initial;
 	display: inline-block;
   	float: left;
 	width : 300px;
@@ -66,10 +66,10 @@
 	height: 25px;
 	border-radius: 5px;
 	border-width: 2px;
-	color: rgba(201,69,57, 1);
+	color: initial;
 		margin-left: 10px;
 	flex-wrap: nowrap;
-	color: rgba(201,69,57, 1);
+	color: initial;
 	display: inline-block;
   	float: left;
 }
@@ -83,6 +83,8 @@
 	border-bottom-right-radius: 0px;
 	border-top-right-radius: 0px;
 	border-right-width: 0px;
+	display: inline-block;
+
 	
 }
 
@@ -106,7 +108,7 @@
 
 	margin-left: 10px;
 	flex-wrap: nowrap;
-	color: rgba(201,69,57, 1);
+	color: grey;
 	display: inline-block;
   	float: left;
 	resize:none;
@@ -114,16 +116,21 @@
 }
 
 .photo {
-position : relative;
+height : 200px;
+width : 500px;
 
 
 }
-.photo >img {
-       position : relative;
+.form >img {
 		width: 150px;
 	max-height: 200px;
+		display: inline-block;
+  	float: left;
 }
-
+#file {
+	display: inline-block;
+  	float: left;
+}
 .valid {
 
 	width : 100%;
@@ -154,11 +161,9 @@ position : relative;
 	box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),  inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
 
-.photo > input {
-visibility:hidden;}
 
 
-.pic > input#pic{
+.pic >input[type="file" i]{
     position: relative;
 	margin-left: 10px;
 	margin-top: 20%;
@@ -178,10 +183,10 @@ visibility:hidden;}
 	box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),  inset -2px -2px 3px rgba(0, 0, 0, .6);
 }
 
-.pic > input#pic{
+.pic >input[type="file" i]{
 	background-color: rgba(255,69,57, 1);
 }
-.pic > input#pic{
+.pic >input[type="file" i]{
 	box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),  inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
 
@@ -192,3 +197,46 @@ visibility:hidden;}
 
 }
 }
+
+@media screen and (max-width: 650px){
+
+.form > select{
+
+	margin-top: 5px;
+	position: relative;
+	margin-left: 10px;
+	white-space: nowrap;
+    display: inline-block;
+    float: left;
+    clear: left;
+
+	}
+
+.form > input{
+	margin-top: 5px;
+	position: relative;
+	margin-left: 10px;
+	white-space: nowrap;
+    display: inline-block;
+    float: left;
+    clear: left;
+	}
+
+
+.form > textarea{
+	margin-top: 5px;
+	position: relative;
+	margin-left: 10px;
+	white-space: nowrap;
+    display: inline-block;
+    float: left;
+    clear: left;
+	}
+
+.form > label {
+    text-align :left;
+    }
+
+	}
+
+

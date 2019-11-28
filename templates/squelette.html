@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/menu.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/page.css') }}">
+
         {% block head %}{% endblock %}
 
 </head>
@@ -19,7 +21,7 @@
   <div class="search-container">
     <form action="/action_page.php">
       <input type="text" placeholder="Chercher une denrée" name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
+      <button type="submit">🔍</button>
     </form>
 	</div>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">

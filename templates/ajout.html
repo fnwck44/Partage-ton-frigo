@@ -19,17 +19,18 @@
   <input id="POST-title" type="text" name="titre" placeholder="titre" maxlength="40">
     <br><br>
         <label for="POST-cat">Catégorie : </label>
-	<select id="POST-cat" type="text" name="frais">
+          <span class="break"></span>
+	<select class="select" id="POST-cat" type="text" name="frais">
 		<option value="frais">frais</option>
 		<option value="sec">sec</option>
 	</select>
    <br><br>
     <label for="dlc">A consommer : </label>
-	<select name="dlc" id="dlc-type">
+    <span class="break"></span>
+	<select class="select" name="dlc" id="dlc-type">
 		<option value="avant le">avant le</option>
 		<option value="de préférence avant le">de préférence avant le</option>
-	</select>
-	<input type="date" id="dlc" name="peremption">
+	<input class="dlc" type="date" id="dlc" name="peremption">
 
 	<br><br>
   <label for="POST-description">Description:</label>
@@ -43,17 +44,15 @@
 
 
 <label>Photo :</label>
-      <div>
 
   <img src="{{ url_for('static', filename='img/upload.svg') }}">
-          <label class="load" for="pic">Charger:</label>
 
+	  <br><br>
 <input class="pic" type="file"
        id="pic" name="pic"
        accept="image/png, image/jpeg">
 
   	  <br><br>
-	</div>
 		  <button class="valid" type="submit" value="Enregistrer"> Valider </button>
 
 </form>
