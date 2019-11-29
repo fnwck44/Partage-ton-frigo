@@ -1,0 +1,17 @@
+## Modifications :
+demo.html --> index.html
+ajout.html --> add.html
+How & What de Whrape intégré dans le Master
+Contact --> admin
+Popups dynamiques sur prendre, jeter et ajouter
+
+
+## A faire :
+
+Format date à la française
+Si plusieurs ajouts le même jour, tri ne marche pas bien --> prendre en compte l'heure ?
+Tri aplhabétique ne marche pas bien (Majuscules et minuscues distinguées ?)
+Barre de recherche
+Gestions des images
+Mettre le texte de How and What dans un encadré comme sur les autres pages ? (class param) (PS : mettre la division principale en class="main" pour avoir l'effet de transition)
+essayer d'améliorer le responsive de add
