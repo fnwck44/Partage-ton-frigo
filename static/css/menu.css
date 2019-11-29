@@ -87,6 +87,7 @@ body {
   font-size: 17px;
   border: none;
   cursor: pointer;
+
 }
 
 .topnav .search-container button:hover {
@@ -97,6 +98,10 @@ body {
 /* Hide the link that should open and close the topnav on small screens */
 .topnav .icon {
   display: none;
+  writing-mode: vertical-rl;
+text-orientation: mixed;
+height : 48px;
+width : 48x;
 }
 
 .main {
