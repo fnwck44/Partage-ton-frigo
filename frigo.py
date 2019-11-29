@@ -1,17 +1,17 @@
 import os
-import sys
 from datetime import datetime
-from flask import Flask,session
+from flask import Flask, Response
 from flask import redirect
 from flask import render_template
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
 from flask_admin.contrib.fileadmin import FileAdmin
 import os.path as op
 from flask_basicauth import BasicAuth
+from flask_admin.contrib import sqla
+from werkzeug.exceptions import HTTPException
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "database.db"))
@@ -19,6 +19,26 @@ database_file = "sqlite:///{}".format(os.path.join(project_dir, "database.db"))
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 db: SQLAlchemy = SQLAlchemy(app)
+
+
+class AuthException(HTTPException):
+    def __init__(self, message):
+        super().__init__(message, Response(
+            message, 401,
+            {'WWW-Authenticate': 'Basic realm="Login Required"'}
+        ))
+
+
+class ModelView(sqla.ModelView):
+    def is_accessible(self):
+        if not basic_auth.authenticate():
+            raise AuthException('Not authenticated. Refresh the page.')
+        else:
+            return True
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(basic_auth.challenge())
+
 
 
 class Aliment(db.Model):
