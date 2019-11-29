@@ -40,7 +40,6 @@ class ModelView(sqla.ModelView):
         return redirect(basic_auth.challenge())
 
 
-
 class Aliment(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     titre = db.Column(db.String(80))
@@ -67,6 +66,12 @@ admin = Admin(app)
 admin.add_view(ModelView(Aliment, db.session))
 path = op.join(op.dirname(__file__), 'static')
 admin.add_view(FileAdmin(path, '/static/', name='Static Files'))
+
+
+@app.route('/logout')
+def Logout():
+    raise AuthException('Successfully logged out.')
+
 
 @app.route('/add', methods=["GET", "POST"])
 def home():
@@ -164,16 +169,17 @@ def prendre():
 def how():
     return render_template("how.html")
 
+
 @app.route('/what')
 def what():
     return render_template("what.html")
 
+
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
-    app.config['BASIC_AUTH_USERNAME'] = 'test'
+    app.config['BASIC_AUTH_USERNAME'] = 'admin'
     app.config['BASIC_AUTH_PASSWORD'] = '123'
     basic_auth = BasicAuth(app)
     app.debug = True
-    #app.run(host='192.168.0.11', port=5000)
+    # app.run(host='192.168.0.11', port=5000)
     app.run()
-
