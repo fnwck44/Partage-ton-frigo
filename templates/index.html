@@ -31,7 +31,7 @@
 
     {% for aliment in aliments %}
     <div class="list">
-        <img class="photo" src="https://static.openfoodfacts.org/images/products/303/835/288/0206/front_fr.42.full.jpg">
+        <img class="photo" src="{{aliment.image}}">
         <div class="text">
             <span class="name">{{aliment.titre}}<span class="cat"> - {{aliment.frais}}</span></span>
             <span class="description">{{aliment.desc}}</span>

@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-from flask import Flask, Response
+from flask import Flask, Response, flash, request, redirect, url_for
 from flask import redirect
 from flask import render_template
 from flask import request
@@ -19,6 +19,9 @@ database_file = "sqlite:///{}".format(os.path.join(project_dir, "database.db"))
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 db: SQLAlchemy = SQLAlchemy(app)
+
+
+UPLOAD_FOLDER = './img_db/'
 
 
 class AuthException(HTTPException):
@@ -50,6 +53,7 @@ class Aliment(db.Model):
     desc = db.Column(db.String(150))
     dlc = db.Column(db.String(30))
     nom = db.Column(db.String(50))
+    image = db.Column(db.String(50))
 
     def __repr__(self):
         return "<Title: {}>".format(self.titre), \
@@ -59,7 +63,8 @@ class Aliment(db.Model):
                "frais:{}".format(self.frais), \
                "desc:{}".format(self.desc), \
                "dlc:{}".format(self.dlc), \
-               "nom:{}".format(self.nom),
+               "nom:{}".format(self.nom), \
+                "image:{}".format(self.image)
 
 
 admin = Admin(app)
@@ -78,6 +83,24 @@ def home():
     aliments = None
     if request.form:
         try:
+
+
+            if request.method == 'POST':
+                # check if the post request has the file part
+                if 'file' not in request.files:
+                    flash('No file part')
+                    return redirect(request.url)
+                print(request.files)
+                file = request.files['file']
+                # if user does not select file, browser also
+                # submit an empty part without filename
+                if file.filename == '':
+                    flash('No selected file')
+                    img_name=request.form.get("frais")
+                if file and allowed_file(file.filename):
+                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+                    img_name=file.filename
+
             aliment = Aliment(titre=request.form.get("titre"),
                               quantity=request.form.get("quantity"),
                               peremption=datetime.strptime(request.form.get("peremption"), '%Y-%m-%d'),
@@ -85,13 +108,17 @@ def home():
                               ajout=datetime.today(),
                               desc=request.form.get("desc"),
                               dlc=request.form.get("dlc"),
-                              nom=request.form.get("nom"))
+                              nom=request.form.get("nom"),
+                              image=img_name)
 
             db.session.add(aliment)
             db.session.commit()
         except Exception as e:
             print("Failed to add aliment")
             print(e)
+
+
+
     aliments = Aliment.query.all()
     return render_template("add.html", aliments=aliments)
 
@@ -175,11 +202,19 @@ def what():
     return render_template("what.html")
 
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+
+
+
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
     app.config['BASIC_AUTH_USERNAME'] = 'admin'
     app.config['BASIC_AUTH_PASSWORD'] = '123'
     basic_auth = BasicAuth(app)
     app.debug = True
-    # app.run(host='192.168.0.11', port=5000)
-    app.run()
+    app.run(host='192.168.0.11', port=5000)
+    #app.run()
