@@ -109,24 +109,31 @@ def home():
                 # submit an empty part without filename
                 if file.filename == '':
                     flash('No selected file')
-                    img_name=request.form.get("frais")+".jpg"
+                    img=url_for('static', filename='img_db/'+request.form.get("frais")+".jpg")
                 if file and allowed_file(file.filename):
                     file.save(os.path.join(UPLOAD_FOLDER, file.filename))
                     img_name=file.filename
                     try :
                         codes = decode(Image.open('./static/img_db/' + img_name))
+                        print(codes)
                         print(1)
-                        code=str(codes[0].data.decode("utf-8"))
+                        if len(codes)>0 :
+                            print(codes)
+                            code=codes[0].data.decode("utf-8")
+                        else :
+                            code = ''
                         print(2)
                         product = openfoodfacts.products.get_product(code)
-                        if product['product']['status_verbose'] == 'product found':
+                        print(2.5)
+                        if product['status_verbose'] == 'product found':
                             print(3)
                             try:
                                 img = product['product']['image_small_url']
+                                os.remove("./static/img_db/" + img_name)
                                 print(4)
 
                             except:
-                                os.remove("./static/img_db/" + img_name)
+
                                 img = url_for('static', filename='img_db/'+ img_name)
 
                             try:
@@ -214,8 +221,11 @@ def delete():
     aliment = Aliment.query.filter_by(id=iddelete).first()
     db.session.delete(aliment)
     db.session.commit()
-    if not ((aliment.image=="frais.jpg") or (aliment.image=="sec.jpg")) :
-        os.remove("./static/img_db/"+aliment.image)
+    if not ((aliment.image=="/static/img_db/frais.jpg ") or (aliment.image=="/static/img_db/sec.jpg ")) :
+        try :
+            os.remove("."+aliment.image)
+        except :
+            pass
     return redirect("/")
 
 

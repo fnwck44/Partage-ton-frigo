@@ -50,13 +50,32 @@
                     <input type="hidden" value="{{aliment.id}}" name="id">
                     <input class="name" type="hidden" value="{{aliment.titre}}" name="name">
                     <input class="throw" type="button" value="Jeter" onclick="discard(this)">
+                    <img src="{{ url_for('static', filename='img/info.png') }}" onload="nutriscore(this, '{{aliment.nutriscore}}', '{{aliment.cb}}');" style="height:40px;">
                 </form>
             </div>
         </div>
     </div>
 
+
     {% endfor %}
 
+            <script>
+        function nutriscore(elem, letter,code){
+            if((letter != "")&&(letter != "0")){
+                elem.onload="";
+                elem.src="https://static.openfoodfacts.org/images/misc/nutriscore-"+letter+".png";
+            if(letter!= ""){
+                a=document.createElement('a');
+                a.href="https://fr.openfoodfacts.org/produit/"+code;
+                a.appendChild(document.createTextNode("En savoir plus..."));
+                elem.parentNode.appendChild(a);}
+
+            }
+           }
+
+</script>
     {% endblock %}
+
+
     </body>
     </html>
