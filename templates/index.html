@@ -31,7 +31,7 @@
 
     {% for aliment in aliments %}
     <div class="list">
-        <img class="photo" src="{{aliment.image}}">
+        <img class="photo" src="{{ aliment.image }}">
         <div class="text">
             <span class="name">{{aliment.titre}}<span class="cat"> - {{aliment.frais}}</span></span>
             <span class="description">{{aliment.desc}}</span>
@@ -54,6 +54,7 @@
             </div>
         </div>
     </div>
+
     {% endfor %}
 
     {% endblock %}

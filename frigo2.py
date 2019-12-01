@@ -13,6 +13,12 @@ from flask_basicauth import BasicAuth
 from flask_admin.contrib import sqla
 from werkzeug.exceptions import HTTPException
 
+from pyzbar.pyzbar import decode
+from PIL import Image
+import openfoodfacts
+
+
+
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "database.db"))
 
@@ -55,6 +61,9 @@ class Aliment(db.Model):
     dlc = db.Column(db.String(30))
     nom = db.Column(db.String(50))
     image = db.Column(db.String(50))
+    nutriscore = db.Column(db.String(10))
+    cb = db.Column(db.String(30))
+
 
     def __repr__(self):
         return "<Title: {}>".format(self.titre), \
@@ -65,7 +74,6 @@ class Aliment(db.Model):
                "desc:{}".format(self.desc), \
                "dlc:{}".format(self.dlc), \
                "nom:{}".format(self.nom)
-               # "image:{}".format(self.image)
 
 
 admin = Admin(app)
@@ -87,7 +95,9 @@ def home():
     if request.form:
         try:
 
-
+            code=''
+            nutriscore=''
+            img=''
             if request.method == 'POST':
                 # check if the post request has the file part
                 if 'file' not in request.files:
@@ -103,6 +113,31 @@ def home():
                 if file and allowed_file(file.filename):
                     file.save(os.path.join(UPLOAD_FOLDER, file.filename))
                     img_name=file.filename
+                    try :
+                        codes = decode(Image.open('./static/img_db/' + img_name))
+                        print(1)
+                        code=str(codes[0].data.decode("utf-8"))
+                        print(2)
+                        product = openfoodfacts.products.get_product(code)
+                        if product['product']['status_verbose'] == 'product found':
+                            print(3)
+                            try:
+                                img = product['product']['image_small_url']
+                                print(4)
+
+                            except:
+                                os.remove("./static/img_db/" + img_name)
+                                img = url_for('static', filename='img_db/'+ img_name)
+
+                            try:
+                                nutriscore = product['product']['nutriscore_grade']
+                            except:
+                                nutriscore = '0'
+                    except :
+                        print('erreur')
+                        img=img_name
+
+
 
             aliment = Aliment(titre=request.form.get("titre"),
                               quantity=request.form.get("quantity"),
@@ -112,7 +147,10 @@ def home():
                               desc=request.form.get("desc"),
                               dlc=request.form.get("dlc"),
                               nom=request.form.get("nom"),
-                              image=img_name)
+                              image=img,
+                              nutriscore =nutriscore,
+                              cb=code
+                              )
 
             db.session.add(aliment)
             db.session.commit()
