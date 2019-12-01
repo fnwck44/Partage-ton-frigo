@@ -5,6 +5,23 @@
 {% endblock %}
 
 {% block corps %}
+            <script>
+        function nutriscore(elem, letter,code){
+            if((letter != "")&&(letter != "0")){
+                elem.onload="";
+                elem.src="https://static.openfoodfacts.org/images/misc/nutriscore-"+letter+".png";
+                }
+            if(code != ""){
+                a=document.createElement('a');
+                a.href="https://fr.openfoodfacts.org/produit/"+code;
+                a.appendChild(document.createTextNode("En savoir plus..."));
+                a.style="	color : rgba(16,33,114,1);  font-family: Arial, Helvetica, sans-serif; font-size:16px; font-style:italic;";
+                elem.parentNode.appendChild(a);
+                }
+           }
+
+    </script>
+
 <div class="main">
     <div class="param">
         <h2>Denrées disponibles</h2>
@@ -38,7 +55,7 @@
             <span class="quantity">Quantité disponible : {{aliment.quantity}} </span>
             <span class="added"> Ajouté le {{aliment.ajout}} par {{aliment.nom}} </span>
             <span class="date"> A consommer {{aliment.dlc}} : {{aliment.peremption}}</span>
-                                        <div><img src="{{ url_for('static', filename='img/info.png') }}" onload="nutriscore(this, '{{aliment.nutriscore}}', '{{aliment.cb}}');" style="height:30px; vertical-align:top; position:relaitve;"></div>
+                                        <div><img src="{{ url_for('static', filename='img/info.png') }}" onload="nutriscore(this, '{{aliment.nutriscore}}', '{{aliment.cb}}');" style="height:30px; vertical-align:top; margin-right:10px;;"></div>
 
             <div class="buttons">
                 <form method="POST" action="./prendre" style="display: inline">
@@ -62,25 +79,8 @@
 
     {% endfor %}
 
-            <script>
-        function nutriscore(elem, letter,code){
-            if((letter != "")&&(letter != "0")){
-                elem.onload="";
-                elem.src="https://static.openfoodfacts.org/images/misc/nutriscore-"+letter+".png";
-                }
-            if(code != ""){
-                a=document.createElement('a');
-                a.href="https://fr.openfoodfacts.org/produit/"+code;
-                a.appendChild(document.createTextNode("En savoir plus..."));
-                a.style="	color : rgba(16,33,114,1);  font-family: Arial, Helvetica, sans-serif; font-size:16px; font-style:italic;";
-                elem.parentNode.appendChild(a);}
 
-
-           }
-
-</script>
     {% endblock %}
 
 
-    </body>
-    </html>
+</div>

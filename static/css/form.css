@@ -161,7 +161,15 @@ width : 500px;
 	box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),  inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
 
-
+.astuce{
+    float: left;
+    margin : 10px;
+    text-align: left;
+    white-space: nowrap;
+    display: inline-block;
+    color:black;
+    font-size : 16px;
+}
 
 .pic >input[type="file" i]{
     position: relative;

@@ -14,7 +14,7 @@ from flask_admin.contrib import sqla
 from werkzeug.exceptions import HTTPException
 
 from pyzbar.pyzbar import decode
-from PIL import Image
+from PIL import Image, ExifTags
 import openfoodfacts
 
 
@@ -133,8 +133,32 @@ def home():
                                 print(4)
 
                             except:
+                                basewidth = 500
 
+                                file = Image.open('./static/img_db/' + img_name)
+                                try:
+                                    for orientation in ExifTags.TAGS.keys():
+                                        if ExifTags.TAGS[orientation] == 'Orientation':
+                                            break
+                                    exif = dict(file._getexif().items())
+
+                                    if exif[orientation] == 3:
+                                        file = file.rotate(180, expand=True)
+                                    elif exif[orientation] == 6:
+                                        file = file.rotate(270, expand=True)
+                                    elif exif[orientation] == 8:
+                                        file = file.rotate(90, expand=True)
+
+                                except (AttributeError, KeyError, IndexError):
+                                    # cases: image don't have getexif
+                                    pass
+                                wpercent = (basewidth / float(file.size[0]))
+                                hsize = int((float(file.size[1]) * float(wpercent)))
+                                file = file.resize((basewidth, hsize), Image.ANTIALIAS)
+                                file.save('./static/img_db/' + img_name)
+                                file.close()
                                 img = url_for('static', filename='img_db/'+ img_name)
+
 
                             try:
                                 nutriscore = product['product']['nutriscore_grade']
