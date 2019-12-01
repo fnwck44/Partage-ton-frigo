@@ -245,7 +245,7 @@ def delete():
     aliment = Aliment.query.filter_by(id=iddelete).first()
     db.session.delete(aliment)
     db.session.commit()
-    if not ((aliment.image=="/static/img_db/frais.jpg ") or (aliment.image=="/static/img_db/sec.jpg ")) :
+    if not ((aliment.image=="/static/img_db/frais.jpg") or (aliment.image=="/static/img_db/sec.jpg")) :
         try :
             os.remove("."+aliment.image)
         except :
