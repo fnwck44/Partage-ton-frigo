@@ -293,5 +293,5 @@ if __name__ == "__main__":
     app.config['BASIC_AUTH_PASSWORD'] = '123'
     basic_auth = BasicAuth(app)
     app.debug = True
-    app.run(host='192.168.0.11', port=5000)
-    #app.run()
+    #app.run(host='192.168.0.25', port=80)
+    app.run()

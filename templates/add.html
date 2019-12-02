@@ -7,10 +7,11 @@
 
 {% block corps %}
 <div class="main">
+    <img id="load" src="{{ url_for('static', filename='img/load.svg') }}" style="position:fixed; width:20%; left:40%; top:30%; visibility:hidden;">
     <div class="param">
         <h2>Ajouter un produit</h2>
         <br>
-        <form class="form" action="" method="post" enctype=multipart/form-data>
+        <form id="window" class="form" action="" method="post" enctype=multipart/form-data>
             <label for="POST-name">Vous êtes :</label>
             <div class="container"></div>
             <input id="POST-name" type="text" name="nom" placeholder="Nom Prénom" maxlength="40">
