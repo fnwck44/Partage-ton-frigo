@@ -53,8 +53,8 @@
             <span class="name">{{aliment.titre}}<span class="cat"> - {{aliment.frais}}</span></span>
             <span class="description">{{aliment.desc}}</span>
             <span class="quantity">Quantité disponible : {{aliment.quantity}} </span>
-            <span class="added"> Ajouté le {{aliment.ajout}} par {{aliment.nom}} </span>
-            <span class="date"> A consommer {{aliment.dlc}} : {{aliment.peremption}}</span>
+            <span class="added"> Ajouté le {{aliment.ajout.strftime('%d-%m-%Y')}} par {{aliment.nom}} </span>
+            <span class="date"> A consommer {{aliment.dlc}} : {{aliment.peremption.strftime('%d-%m-%Y')}}</span>
                                         <div><img src="{{ url_for('static', filename='img/info.png') }}" onload="nutriscore(this, '{{aliment.nutriscore}}', '{{aliment.cb}}');" style="height:30px; vertical-align:top; margin-right:10px;;"></div>
 
             <div class="buttons">

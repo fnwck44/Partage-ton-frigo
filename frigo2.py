@@ -73,7 +73,8 @@ class Aliment(db.Model):
                "frais:{}".format(self.frais), \
                "desc:{}".format(self.desc), \
                "dlc:{}".format(self.dlc), \
-               "nom:{}".format(self.nom)
+               "nom:{}".format(self.nom), \
+               "id:{}".format(self.id)
 
 
 admin = Admin(app)
@@ -170,7 +171,7 @@ def home():
 
 
 
-            aliment = Aliment(titre=request.form.get("titre"),
+            aliment = Aliment(titre=request.form.get("titre").capitalize(),
                               quantity=request.form.get("quantity"),
                               peremption=datetime.strptime(request.form.get("peremption"), '%Y-%m-%d'),
                               frais=request.form.get("frais"),
@@ -224,9 +225,9 @@ def list():
         ajd = datetime.today()
         aliments = Aliment.query.filter(Aliment.peremption < ajd)
     elif order == "date+":
-        aliments = Aliment.query.order_by(Aliment.ajout)
+        aliments = Aliment.query.order_by(Aliment.id)
     elif order == "date-":
-        aliments = Aliment.query.order_by(desc(Aliment.ajout))
+        aliments = Aliment.query.order_by(desc(Aliment.id))
     elif order == "dlc+":
         aliments = Aliment.query.order_by(Aliment.peremption)
     elif order == "dlc-":
@@ -293,5 +294,4 @@ if __name__ == "__main__":
     app.config['BASIC_AUTH_PASSWORD'] = '123'
     basic_auth = BasicAuth(app)
     app.debug = True
-    app.run(host='192.168.0.11', port=5000)
-    #app.run()
+    app.run()
