@@ -73,7 +73,8 @@ class Aliment(db.Model):
                "frais:{}".format(self.frais), \
                "desc:{}".format(self.desc), \
                "dlc:{}".format(self.dlc), \
-               "nom:{}".format(self.nom)
+               "nom:{}".format(self.nom), \
+               "id:{}".format(self.id)
 
 
 admin = Admin(app)
@@ -170,7 +171,7 @@ def home():
 
 
 
-            aliment = Aliment(titre=request.form.get("titre"),
+            aliment = Aliment(titre=request.form.get("titre").capitalize(),
                               quantity=request.form.get("quantity"),
                               peremption=datetime.strptime(request.form.get("peremption"), '%Y-%m-%d'),
                               frais=request.form.get("frais"),
@@ -185,6 +186,7 @@ def home():
 
             db.session.add(aliment)
             db.session.commit()
+            return redirect("/")
         except Exception as e:
             print("Failed to add aliment")
             print(e)
@@ -224,9 +226,9 @@ def list():
         ajd = datetime.today()
         aliments = Aliment.query.filter(Aliment.peremption < ajd)
     elif order == "date+":
-        aliments = Aliment.query.order_by(Aliment.ajout)
+        aliments = Aliment.query.order_by(Aliment.id)
     elif order == "date-":
-        aliments = Aliment.query.order_by(desc(Aliment.ajout))
+        aliments = Aliment.query.order_by(desc(Aliment.id))
     elif order == "dlc+":
         aliments = Aliment.query.order_by(Aliment.peremption)
     elif order == "dlc-":
