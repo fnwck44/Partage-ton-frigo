@@ -186,6 +186,7 @@ def home():
 
             db.session.add(aliment)
             db.session.commit()
+            return redirect("/")
         except Exception as e:
             print("Failed to add aliment")
             print(e)
