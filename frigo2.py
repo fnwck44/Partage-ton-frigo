@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import Flask, Response, flash, request, redirect, url_for, send_from_directory
 from flask import redirect
 from flask import render_template
@@ -286,11 +286,13 @@ def update():
 
 @app.route('/', methods=["GET", "POST"])
 def list():
+    now=datetime.date(datetime.today())
+    twodays=datetime.date(datetime.today()+timedelta(days=2))
     filter = request.form.get("filter")
     order = request.form.get("order")
     aliments = Aliment.query.all()
     aliments = affiche(aliments,filter,order)
-    return render_template("index.html", aliments=aliments)
+    return render_template("index.html", aliments=aliments, now=now, twodays=twodays)
 
 
 @app.route("/delete", methods=["POST"])
