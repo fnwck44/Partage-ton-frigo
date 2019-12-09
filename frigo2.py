@@ -18,6 +18,79 @@ from PIL import Image, ExifTags
 import openfoodfacts
 
 
+def affiche(aliments,filter, order):
+    ajd = datetime.today()
+    if filter == "none":
+        if order == "date+":
+            aliments = Aliment.query.order_by(desc(Aliment.id))
+        elif order == "date-":
+            aliments = Aliment.query.order_by(Aliment.id)
+        elif order == "dlc+":
+            aliments = Aliment.query.order_by(Aliment.peremption)
+        elif order == "dlc-":
+            aliments = Aliment.query.order_by(desc(Aliment.peremption))
+        elif order == "name":
+            aliments = Aliment.query.order_by(Aliment.titre)
+        else:
+            aliments = Aliment.query.order_by(desc(Aliment.ajout))
+    elif filter == "sec":
+        if order == "date+":
+            aliments = Aliment.query.order_by(Aliment.id).filter_by(frais='sec')
+        elif order == "date-":
+            aliments = Aliment.query.order_by(desc(Aliment.id)).filter_by(frais='sec')
+        elif order == "dlc+":
+            aliments = Aliment.query.order_by(Aliment.peremption).filter_by(frais='sec')
+        elif order == "dlc-":
+            aliments = Aliment.query.order_by(desc(Aliment.peremption)).filter_by(frais='sec')
+        elif order == "name":
+            aliments = Aliment.query.order_by(Aliment.titre).filter_by(frais='sec')
+        else:
+            aliments = Aliment.query.order_by(desc(Aliment.ajout)).filter_by(frais='sec')
+    elif filter == "frais":
+        if order == "date+":
+            aliments = Aliment.query.order_by(desc(Aliment.id)).filter_by(frais='frais')
+        elif order == "date-":
+            aliments = Aliment.query.order_by(Aliment.id).filter_by(frais='frais')
+        elif order == "dlc+":
+            aliments = Aliment.query.order_by(Aliment.peremption).filter_by(frais='frais')
+        elif order == "dlc-":
+            aliments = Aliment.query.order_by(desc(Aliment.peremption)).filter_by(frais='frais')
+        elif order == "name":
+            aliments = Aliment.query.order_by(Aliment.titre).filter_by(frais='frais')
+        else:
+            aliments = Aliment.query.order_by(desc(Aliment.ajout)).filter_by(frais='frais')
+
+    elif filter == "ok":
+        if order == "date+":
+            aliments = Aliment.query.order_by(desc(Aliment.id)).filter_by(frais='frais').filter(Aliment.peremption > ajd)
+        elif order == "date-":
+            aliments = Aliment.query.order_by(Aliment.id).filter_by(frais='frais').filter(Aliment.peremption > ajd)
+        elif order == "dlc+":
+            aliments = Aliment.query.order_by(Aliment.peremption).filter_by(frais='frais').filter(Aliment.peremption > ajd)
+        elif order == "dlc-":
+            aliments = Aliment.query.order_by(desc(Aliment.peremption)).filter_by(frais='frais').filter(Aliment.peremption > ajd)
+        elif order == "name":
+            aliments = Aliment.query.order_by(Aliment.titre).filter_by(frais='frais').filter(Aliment.peremption > ajd)
+        else:
+            aliments = Aliment.query.order_by(desc(Aliment.ajout)).filter_by(frais='frais').filter(Aliment.peremption > ajd)
+
+    elif filter == "perime":
+        if order == "date+":
+            aliments = Aliment.query.order_by(desc(Aliment.id)).filter_by(frais='frais').filter(Aliment.peremption < ajd)
+        elif order == "date-":
+            aliments = Aliment.query.order_by(Aliment.id).filter_by(frais='frais').filter(Aliment.peremption < ajd)
+        elif order == "dlc+":
+            aliments = Aliment.query.order_by(Aliment.peremption).filter_by(frais='frais').filter(Aliment.peremption < ajd)
+        elif order == "dlc-":
+            aliments = Aliment.query.order_by(desc(Aliment.peremption)).filter_by(frais='frais').filter(Aliment.peremption < ajd)
+        elif order == "name":
+            aliments = Aliment.query.order_by(Aliment.titre).filter_by(frais='frais').filter(Aliment.peremption < ajd)
+        else:
+            aliments = Aliment.query.order_by(desc(Aliment.ajout)).filter_by(frais='frais').filter(Aliment.peremption < ajd)
+
+    return aliments
+
+
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "database.db"))
@@ -215,29 +288,8 @@ def update():
 def list():
     filter = request.form.get("filter")
     order = request.form.get("order")
-    if filter == "sec":
-        aliments = Aliment.query.filter_by(frais='sec')
-    elif filter == "frais":
-        aliments = Aliment.query.filter_by(frais='frais')
-    elif filter == "ok":
-        ajd = datetime.today()
-        aliments = Aliment.query.filter(Aliment.peremption > ajd)
-    elif filter == "perime":
-        ajd = datetime.today()
-        aliments = Aliment.query.filter(Aliment.peremption < ajd)
-    elif order == "date+":
-        aliments = Aliment.query.order_by(Aliment.id)
-    elif order == "date-":
-        aliments = Aliment.query.order_by(desc(Aliment.id))
-    elif order == "dlc+":
-        aliments = Aliment.query.order_by(Aliment.peremption)
-    elif order == "dlc-":
-        aliments = Aliment.query.order_by(desc(Aliment.peremption))
-    elif order == "name":
-        aliments = Aliment.query.order_by(Aliment.titre)
-    else:
-        aliments = Aliment.query.order_by(desc(Aliment.ajout))
-
+    aliments = Aliment.query.all()
+    aliments = affiche(aliments,filter,order)
     return render_template("index.html", aliments=aliments)
 
 
