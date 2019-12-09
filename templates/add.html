@@ -1,8 +1,8 @@
 {% extends "squelette.html" %}
 
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/form.css') }}">
+<link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/form.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block corps %}
@@ -11,36 +11,37 @@
     <div class="param">
         <h2>Ajouter un produit</h2>
         <br>
-        <form id="window" class="form" action="" method="post" enctype=multipart/form-data>
+        <form action="" class="form" enctype=multipart/form-data id="window" method="post">
             <label for="POST-name">Vous êtes :</label>
             <div class="container"></div>
-            <input id="POST-name" type="text" name="nom" placeholder="Nom Prénom" maxlength="40">
+            <input id="POST-name" maxlength="40" name="nom" placeholder="Nom Prénom" type="text">
             <br><br>
             <label for="POST-title">Produit ajouté :</label>
-            <input id="POST-title" type="text" name="titre" placeholder="titre" maxlength="40">
+            <input id="POST-title" maxlength="40" name="titre" placeholder="titre" type="text">
             <br><br>
             <label for="POST-cat">Catégorie : </label>
             <span class="break"></span>
-            <select class="select" id="POST-cat" type="text" name="frais">
+            <select class="select" id="POST-cat" name="frais" type="text">
                 <option value="frais">frais</option>
                 <option value="sec">sec</option>
             </select>
             <br><br>
             <label for="dlc">A consommer : </label>
             <span class="break"></span>
-            <select class="select" name="dlc" id="dlc-type">
+            <select class="select" id="dlc-type" name="dlc">
                 <option value="avant le">avant le</option>
                 <option value="de préférence avant le">de préférence avant le</option>
-                <input class="dlc" type="date" id="dlc" name="peremption">
+                <input class="dlc" id="dlc" name="peremption" type="date">
 
                 <br><br>
                 <label for="POST-description">Description:</label>
-                <textarea id="POST-description" type="text" name="desc" placeholder="facultatif, 150 caractères max"
-                          maxlength="150"></textarea>
+                <textarea id="POST-description" maxlength="150" name="desc" placeholder="facultatif, 150 caractères max"
+                          type="text"></textarea>
                 <br><br>
+
                 <label for="POST-qty">Quantité :</label>
 
-                <input id="POST-qty" type="number" name="quantity" value="1" min="1">
+                <input id="POST-qty" min="1" name="quantity" type="number" value="1">
 
                 <br><br>
 
@@ -54,12 +55,12 @@
                 <img src="{{ url_for('static', filename='img/upload.svg') }}">
 
                 <br><br>
-                <input class="pic" type="file"
+                <input accept="image/png, image/jpeg" class="pic"
                        id="pic" name="file"
-                       accept="image/png, image/jpeg">
+                       type="file">
 
                 <br><br>
-                <button class="valid" type="button" value="Enregistrer" onclick="save(this)"> Valider</button>
+                <button class="valid" onclick="save(this)" type="button" value="Enregistrer"> Valider</button>
 
         </form>
 
@@ -68,7 +69,28 @@
 
 
 </div>
+<script>
 
+function save(elem) {
+    form=elem.parentNode;
+  date=document.getElementById("dlc").value;
+  title=document.getElementById("POST-title").value;
+  name=document.getElementById("POST-name").value;
+  if((dlc=="")||(name=="")||title==""){
+    alert("Renseignement(s) manquant(s)")
+    }
+  else{
+  r=confirm("Êtes vous sûr d'ajouter cet aliment ?");
+
+        if(r){
+        document.getElementById("load").style.visibility="visible";
+        document.getElementById("window").style.opacity="0.2";
+
+        form.submit();
+        }
+   }
+}
+</script>
 
 {% endblock %}
 </body>
