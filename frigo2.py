@@ -96,9 +96,11 @@ def find(txt, aliments):
     for aliment in aliments:
         titre = aliment.titre.lower()
         desc = aliment.desc.lower()
+        frais=aliment.frais
         result1 = titre.find(txt)
         result2 = desc.find(txt)
-        if result1 != -1 or result2 != -1:
+        result3 = frais.find(txt)
+        if result1 != -1 or result2 != -1 or result3 != -1 :
             result.append(aliment)
     return(result)
 
@@ -279,20 +281,6 @@ def home():
 
     aliments = Aliment.query.all()
     return render_template("add.html", aliments=aliments)
-
-
-@app.route("/update", methods=["POST"])
-def update():
-    try:
-        newtitle = request.form.get("newtitle")
-        oldtitle = request.form.get("oldtitle")
-        aliment = Aliment.query.filter_by(titre=oldtitle).first()
-        aliment.titre = newtitle
-        db.session.commit()
-    except Exception as e:
-        print("Couldn't update aliment titre")
-        print(e)
-    return redirect("/")
 
 
 @app.route('/', methods=["GET", "POST"])
