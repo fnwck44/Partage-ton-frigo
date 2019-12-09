@@ -1,5 +1,7 @@
 import os
 from datetime import datetime
+from gettext import find
+
 from flask import Flask, Response, flash, request, redirect, url_for, send_from_directory
 from flask import redirect
 from flask import render_template
@@ -91,6 +93,17 @@ def affiche(aliments,filter, order):
     return aliments
 
 
+def find(txt, aliments):
+    result = []
+    for aliment in aliments:
+        titre = aliment.titre.lower()
+        desc = aliment.desc.lower()
+        result1 = titre.find(txt)
+        result2 = desc.find(txt)
+        if result1 != -1 or result2 != -1:
+            result.append(aliment)
+    return(result)
+
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "database.db"))
@@ -155,7 +168,6 @@ admin.add_view(ModelView(Aliment, db.session))
 path_static = op.join(op.dirname(__file__), 'static')
 path_db = op.join(op.dirname(__file__), 'img_db')
 admin.add_view(FileAdmin(path_static, '/static/', name='Static Files'))
-#admin.add_view(FileAdmin(path_db, '/img_db/', name='image database'))
 
 
 @app.route('/logout')
@@ -306,6 +318,12 @@ def delete():
             pass
     return redirect("/")
 
+@app.route("/search", methods=["POST"])
+def search():
+    search = request.form.get("search")
+    allaliments = Aliment.query.all()
+    aliments = find(search,allaliments)
+    return render_template("index.html", aliments=aliments)
 
 @app.route("/prendre", methods=["POST"])
 def prendre():
