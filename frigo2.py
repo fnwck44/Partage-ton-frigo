@@ -320,11 +320,14 @@ def delete():
     return redirect("/")
 
 @app.route("/search", methods=["POST"])
+
 def search():
+    now=datetime.date(datetime.today())
+    twodays=datetime.date(datetime.today()+timedelta(days=2))
     search = request.form.get("search")
     allaliments = Aliment.query.all()
     aliments = find(search,allaliments)
-    return render_template("index.html", aliments=aliments)
+    return render_template("index.html", aliments=aliments, now=now, twodays=twodays)
 
 @app.route("/prendre", methods=["POST"])
 def prendre():

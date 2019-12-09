@@ -55,6 +55,13 @@
             <span class="quantity">Quantité disponible : {{aliment.quantity}} </span>
             <span class="added"> Ajouté le {{aliment.ajout.strftime('%d-%m-%Y')}} par {{aliment.nom}} </span>
             <span class="date"> A consommer {{aliment.dlc}} : {{aliment.peremption.strftime('%d-%m-%Y')}}
+                {{aliment.peremption.strftime('%d-%m-%Y')}}
+                {% if((aliment.peremption<=now) and aliment.dlc=="avant le") %}
+                 <img src="https://www.freeiconspng.com/uploads/red-warning-icon-15.png" style="height:26px; position:absolute; ">
+                {% endif %}
+                {% if((aliment.peremption<=twodays) and aliment.dlc=="de préférence avant le") %}
+                 <img src="https://www.freeiconspng.com/uploads/red-warning-icon-15.png" style="height:26px; position:absolute; ">
+                {% endif %}
             </span>
             <div><img src="{{ url_for('static', filename='img/info.png') }}" onload="nutriscore(this, '{{aliment.nutriscore}}', '{{aliment.cb}}');" style="height:30px; vertical-align:top; margin-right:10px;;"></div>
 
