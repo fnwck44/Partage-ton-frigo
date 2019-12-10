@@ -291,7 +291,7 @@ def list():
     order = request.form.get("order")
     aliments = Aliment.query.all()
     aliments = affiche(aliments,filter,order)
-    return render_template("index.html", aliments=aliments, now=now, twodays=twodays)
+    return render_template("index.html", search=None, filter=filter, order=order, aliments=aliments, now=now, twodays=twodays)
 
 
 @app.route("/delete", methods=["POST"])
@@ -315,7 +315,7 @@ def search():
     search = request.form.get("search")
     allaliments = Aliment.query.all()
     aliments = find(search,allaliments)
-    return render_template("index.html", aliments=aliments, now=now, twodays=twodays)
+    return render_template("index.html", search=search,filter=None, order=None, aliments=aliments, now=now, twodays=twodays)
 
 @app.route("/prendre", methods=["POST"])
 def prendre():

@@ -28,22 +28,29 @@
         <form class="form" action="" method="post">
             <label for="order">Trier par :</label>
             <select name="order" id="order" onload="defaut(this, {{ order }} ) ">
-                <option value="date+">date d'ajout croissante</option>
-                <option value="date-">date d'ajout décroissante</option>
-                <option value="dlc+">date de péremption croissante</option>
-                <option value="dlc-">date de péremption décroissante</option>
-                <option value="name">ordre alphabétique</option>
+                <option value="date+" {% if order=='date+' %} selected {% endif %}>date d'ajout croissante</option>
+                <option value="date-" {% if order=='date-' %} selected {% endif %}>date d'ajout décroissante</option>
+                <option value="dlc+" {% if order=='dlc+' %} selected {% endif %}>date de péremption croissante</option>
+                <option value="dlc-" {% if order=='dlc-' %} selected {% endif %}>date de péremption décroissante</option>
+                <option value="name" {% if order=='name' %} selected {% endif %}>ordre alphabétique</option>
             </select>
             <label for="filter">Filtrage :</label>
             <select name="filter" id="filter">
-                <option value="none">aucun</option>
-                <option value="sec">au sec</option>
-                <option value="frais">au frais</option>
-                <option value="ok">non périmé</option>
-                <option value="perime">périmé</option>
+                <option value="none" {% if filter=='None' %} selected {% endif %}>aucun</option>
+                <option value="sec"  {% if filter=='sec' %} selected {% endif %}>au sec</option>
+                <option value="frais"  {% if filter=='frais' %} selected {% endif %}>au frais</option>
+                <option value="ok"  {% if filter=='ok' %} selected {% endif %}>non périmé</option>
+                <option value="perime"  {% if filter=='perime' %} selected {% endif %}>périmé</option>
             </select>
             <button class="take" type="submit" value="Add"> Appliquer</button>
         </form>
+
+        <label>
+            {% if search!=None %}
+            Résultats de la recherche : " {{search}} "
+            <br>
+            {% endif %}
+        </label>
     </div>
 
     {% for aliment in aliments %}
