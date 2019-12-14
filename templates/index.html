@@ -81,7 +81,7 @@
             <div><img src="{{ url_for('static', filename='img/info.png') }}" onload="nutriscore(this, '{{aliment.nutriscore}}', '{{aliment.cb}}');" style="height:30px; vertical-align:top; margin-right:10px;;"></div>
 
             <div class="buttons">
-                <form method="POST" action="./prendre" style="display: inline">
+                <form method="POST" action="./prendre" style="display: inline" >
                     <input type="hidden" value="{{aliment.id}}" name="id">
                     <input class="name" type="hidden" value="{{aliment.titre}}" name="name">
                     <input type="hidden" value="{{aliment.quantity}}" name="qty">

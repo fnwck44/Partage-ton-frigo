@@ -318,7 +318,7 @@ def prendre():
     aliment = Aliment.query.filter_by(id=idtake).first()
     aliment.quantity = int(oldqty) - int(take)
     db.session.commit()
-    if aliment.quantity == 0:
+    if aliment.quantity <= 0:
         db.session.delete(aliment)
         db.session.commit()
         return redirect("/")
