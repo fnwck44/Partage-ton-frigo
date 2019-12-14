@@ -23,12 +23,7 @@
   <a href="what">Qu'est-ce que c'est ?</a>
   <a href="how">Comment ça marche ?</a>
   <a href="admin">Administration</a>
-  <div class="search-container">
-    <form method="POST" action="./search">
-      <input type="text" placeholder="Chercher une denrée" name="search">
-      <button type="submit">🔍</button>
-    </form>
-	</div>
+    {% block search %}{% endblock %}
   <a href="javascript:void(0);" class="icon" onclick="menu()">
       <b>|||</b>
   </a>

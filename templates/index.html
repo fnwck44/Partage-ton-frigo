@@ -4,6 +4,15 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/liste.css') }}">
 {% endblock %}
 
+{% block search %}
+ <div class="search-container">
+    <form method="POST" action="./">
+      <input type="text" placeholder="Chercher une denrée" name="search">
+      <button type="submit">🔍</button>
+    </form>
+ </div>
+{% endblock %}
+
 {% block corps %}
             <script>
         function nutriscore(elem, letter,code){
@@ -62,7 +71,6 @@
             <span class="quantity">Quantité disponible : {{aliment.quantity}} </span>
             <span class="added"> Ajouté le {{aliment.ajout.strftime('%d-%m-%Y')}} par {{aliment.nom}} </span>
             <span class="date"> A consommer {{aliment.dlc}} : {{aliment.peremption.strftime('%d-%m-%Y')}}
-                {{aliment.peremption.strftime('%d-%m-%Y')}}
                 {% if((aliment.peremption<=now) and aliment.dlc=="avant le") %}
                  <img src="https://www.freeiconspng.com/uploads/red-warning-icon-15.png" style="height:26px; position:absolute; ">
                 {% endif %}
