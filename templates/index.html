@@ -38,6 +38,7 @@
             <label for="order">Trier par :</label>
             <select name="order" id="order" onload="defaut(this, {{ order }} ) ">
                 <option value="date+" {% if order=='date+' %} selected {% endif %}>date d'ajout croissante</option>
+
                 <option value="date-" {% if order=='date-' %} selected {% endif %}>date d'ajout décroissante</option>
                 <option value="dlc+" {% if order=='dlc+' %} selected {% endif %}>date de péremption croissante</option>
                 <option value="dlc-" {% if order=='dlc-' %} selected {% endif %}>date de péremption décroissante</option>

@@ -58,7 +58,7 @@ def affiche(aliments, filter, order):
         elif order == "name":
             aliments = Aliment.query.order_by(Aliment.titre)
         else:
-            aliments = Aliment.query.order_by(desc(Aliment.ajout))
+            aliments = Aliment.query.order_by(Aliment.id)
     elif filter == "sec":
         if order == "date+":
             aliments = Aliment.query.order_by(Aliment.id).filter_by(frais='sec')
@@ -120,6 +120,7 @@ def affiche(aliments, filter, order):
 # fonction qui permet la rechercher (search bar)
 def find(txt, aliments):
     result = []
+    txt=txt.lower()
     for aliment in aliments:
         titre = aliment.titre.lower()
         desc = aliment.desc.lower()
@@ -308,8 +309,6 @@ def home():
 def list():
     now = datetime.date(datetime.today())
     twodays = datetime.date(datetime.today() + timedelta(days=2))
-    filter = request.form.get("filter")
-    order = request.form.get("order")
     aliments = Aliment.query.all()
     res = request.form.get("search")
     if res != None :
