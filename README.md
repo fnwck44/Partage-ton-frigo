@@ -32,10 +32,10 @@ Mot de pass:123
 * [Pycharm](https://www.jetbrains.com/fr-fr/pycharm/) - Editeur de textes
 
 ## Auteurs
-HUGO BRANDILY - h6brandi@enib.fr
-SOLÈNE ÉLÉONORE - s6eleono@enib.fr
-THOMAS HÉVELINE - t6heveli@enib.fr
-HUGO MEUR - h6meur@enib.fr
+- HUGO BRANDILY h6brandi@enib.fr
+- SOLÈNE ÉLÉONORE  s6eleono@enib.fr
+- THOMAS HÉVELINE  t6heveli@enib.fr
+- HUGO MEUR  h6meur@enib.fr
 
 
 
