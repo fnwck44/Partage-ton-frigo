@@ -1,67 +1,42 @@
-# Titre du projet
-_(juste en dessous des badges sympatiques à placer)_
+# Partage ton frigo
 
-[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)  [![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 
-Une petite description du projet
+Partage ton frigo est un projet open source développé dans le cadre du cours d'informatique S6 à l'ENIB
 
 ## Pour commencer
+## Installation
 
-Entrez ici les instructions pour bien débuter avec votre projet...
+Installation des librairies nécessaire:
 
-### Pré-requis
-
-Ce qu'il est requis pour commencer avec votre projet...
-
-- Programme 1
-- Programme 2
-- etc...
-
-### Installation
-
-Les étapes pour installer votre programme....
-
-Dites ce qu'il faut faire...
-
-_exemple_: Executez la commande ``telnet mapscii.me`` pour commencer ensuite [...]
+```
+$ pip install -r requirements.txt
+```
 
 
-Ensuite vous pouvez montrer ce que vous obtenez au final...
+## Lancer flask :
+```
+$ python Partage-ton-frigo/frigo.py
+```
 
-## Démarrage
+Votre site internet:  `http://127.0.0.1:5000`
 
-Dites comment faire pour lancer votre projet
+## Administration :
+A changer !!!
+User:admin
+Mot de pass:123
 
 ## Fabriqué avec
 
-Entrez les programmes/logiciels/ressources que vous avez utilisé pour développer votre projet
-
-_exemples :_
-* [Materialize.css](http://materializecss.com) - Framework CSS (front-end)
-* [Atom](https://atom.io/) - Editeur de textes
-
-## Contributing
-
-Si vous souhaitez contribuer, lisez le fichier [CONTRIBUTING.md](https://example.org) pour savoir comment le faire.
-
-## Versions
-Listez les versions ici 
-_exemple :_
-**Dernière version stable :** 5.0
-**Dernière version :** 5.1
-Liste des versions : [Cliquer pour afficher](https://github.com/your/project-name/tags)
-_(pour le lien mettez simplement l'URL de votre projets suivi de ``/tags``)_
+* [Flask] - Framework Python pour Web
+* [Pycharm](https://www.jetbrains.com/fr-fr/pycharm/) - Editeur de textes
 
 ## Auteurs
-Listez le(s) auteur(s) du projet ici !
-* **Jhon doe** _alias_ [@outout14](https://github.com/outout14)
+HUGO BRANDILY - h6brandi@enib.fr
+SOLÈNE ÉLÉONORE - s6eleono@enib.fr
+THOMAS HÉVELINE - t6heveli@enib.fr
+HUGO MEUR - h6meur@enib.fr
 
-Lisez la liste des [contributeurs](https://github.com/your/project/contributors) pour voir qui à aidé au projet !
 
-_(pour le lien mettez simplement l'URL de votre projet suivi de ``/contirubors``)_
-
-## License
-
-Ce projet est sous licence ``exemple: WTFTPL`` - voir le fichier [LICENSE.md](LICENSE.md) pour plus d'informations
 
 
