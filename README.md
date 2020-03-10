@@ -28,7 +28,7 @@ A changer !!!
 User:admin
 Mot de pass:123
 
-## Fabriqué avec
+## Technologies :
 
 * [Flask] - Framework Python pour Web
 * [Pycharm](https://www.jetbrains.com/fr-fr/pycharm/) - Editeur de textes
