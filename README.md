@@ -2,6 +2,8 @@
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 
+![alt text](https://zupimages.net/viewer.php?id=20/11/xwla.png)
+
 Partage ton frigo est un projet open source développé dans le cadre du cours d'informatique S6 à l'ENIB
 
 ## Pour commencer
